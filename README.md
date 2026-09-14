@@ -34,7 +34,7 @@ O **Lumina Checkout** resolve isso com uma SPA (Single Page Application) em Reac
 
 **Vídeo de apresentação (até 7 min):** _(inserir o link do Google Drive aqui)_
 
-**Quadro de tarefas no Trello:** _(inserir o link público do Trello aqui)_
+**Quadro de tarefas no Trello:** https://trello.com/b/56o2RaMZ/lumina-checkout-mini-projeto-m2s07
 
 ## Fluxo da aplicação
 
@@ -66,6 +66,8 @@ A validação acontece em duas etapas independentes:
 
 Não há validação de bandeira, algoritmo de Luhn ou data de vencimento — o enunciado dispensa esses casos.
 
+Os três campos numéricos têm **máscara de digitação**: o número do cartão é agrupado de quatro em quatro automaticamente, a validade recebe a barra sozinha e o CVV aceita apenas três dígitos. As máscaras apenas formatam o que aparece na tela — quem valida continua sendo o schema do Zod, que remove espaços e hífens antes de contar os dígitos.
+
 **2. Regra de negócio** (`src/utils/pagamento.js`) — depois que o formato é aprovado, a aplicação verifica se **os 16 dígitos do cartão são todos iguais**:
 
 - Todos iguais (ex.: `5555 5555 5555 5555`) → navega para `/falha` e exibe a mensagem exata **`tentativa de golpe`**.
@@ -82,7 +84,7 @@ A verificação considera **apenas o número do cartão**, não a repetição en
 | Listas e `key` | `produtos.map()` em `Carrinho.jsx`, com `key={produto.id}` (id estável, não índice) |
 | Objetos, arrays e métodos | `map`, `reduce` e `filter` em `src/utils/pagamento.js` e `Carrinho.jsx` |
 | `useState` | Estado `processando` dentro do custom hook |
-| Eventos e renderização condicional | Envio do formulário, mensagens de erro e texto do botão |
+| Eventos e renderização condicional | Envio do formulário, mensagens de erro, máscaras de digitação e texto do botão |
 | React Hook Form + Zod | `Pagamento.jsx` com `zodResolver` e o schema `esquemaCartao` |
 | Custom hook | `usePagamento` concentra o processamento e a navegação pós-compra |
 | React Router | Quatro rotas em `App.jsx`, `<Link>` para navegação e `useNavigate()` programático |
@@ -215,7 +217,6 @@ Cada feature branch foi mesclada em `develop` com `--no-ff`, preservando o hist�
 
 - Carregar os produtos de uma API real com `fetch` e `useEffect`, tratando os estados de carregamento, lista vazia e erro.
 - Permitir alterar quantidades e remover itens do carrinho.
-- Aplicar máscara de digitação no número do cartão e na validade, mantendo a normalização atual.
 - Adicionar testes automatizados das regras de negócio com Vitest.
 - Implementar a rota dinâmica de resultado (`/resultado/:status`), unificando as telas de sucesso e falha — o bônus sugerido no enunciado.
 - Incluir tema escuro respeitando `prefers-color-scheme`.

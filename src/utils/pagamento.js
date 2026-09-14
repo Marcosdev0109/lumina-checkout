@@ -36,3 +36,28 @@ export function formatarMoeda(valor) {
     currency: 'BRL'
   })
 }
+
+/**
+ * Mascaras de digitacao.
+ * Formatam o que o usuario ve enquanto digita, sem alterar as regras de
+ * validacao: o schema do Zod continua removendo espacos e hifens antes
+ * de contar os digitos.
+ */
+
+/** Agrupa o numero do cartao de quatro em quatro: 4111 1111 1111 1111 */
+export function mascaraCartao(valor) {
+  const digitos = String(valor ?? '').replace(/\D/g, '').slice(0, 16)
+  return digitos.replace(/(\d{4})(?=\d)/g, '$1 ')
+}
+
+/** Insere a barra da validade automaticamente: 12/29 */
+export function mascaraValidade(valor) {
+  const digitos = String(valor ?? '').replace(/\D/g, '').slice(0, 4)
+  if (digitos.length <= 2) return digitos
+  return digitos.slice(0, 2) + '/' + digitos.slice(2)
+}
+
+/** Mantem apenas digitos, limitando o tamanho (usado no CVV). */
+export function somenteDigitos(valor, maximo) {
+  return String(valor ?? '').replace(/\D/g, '').slice(0, maximo)
+}

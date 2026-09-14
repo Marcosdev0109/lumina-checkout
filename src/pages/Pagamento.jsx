@@ -5,7 +5,12 @@ import { z } from 'zod'
 import ResumoCompra from '../components/ResumoCompra'
 import { usePagamento } from '../hooks/usePagamento'
 import { produtos } from '../data/produtos'
-import { calcularTotal } from '../utils/pagamento'
+import {
+  calcularTotal,
+  mascaraCartao,
+  mascaraValidade,
+  somenteDigitos
+} from '../utils/pagamento'
 
 /**
  * Esquema de validacao de formato do cartao (RF06).
@@ -53,6 +58,20 @@ function Pagamento() {
     defaultValues: { titular: '', numero: '', validade: '', cvv: '' }
   })
 
+  // Registros dos campos com mascara. A formatacao acontece antes de o
+  // React Hook Form receber o valor, entao o estado do formulario e o que
+  // o usuario ve ficam sempre iguais.
+  const campoNumero = register('numero')
+  const campoValidade = register('validade')
+  const campoCvv = register('cvv')
+
+  function comMascara(campo, formatar) {
+    return (evento) => {
+      evento.target.value = formatar(evento.target.value)
+      campo.onChange(evento)
+    }
+  }
+
   return (
     <main className="pagina" id="conteudo">
       <header className="pagina__cabecalho">
@@ -93,12 +112,13 @@ function Pagamento() {
             id="numero"
             type="text"
             inputMode="numeric"
-            maxLength={25}
+            maxLength={19}
             autoComplete="off"
             placeholder="0000 0000 0000 0000"
             aria-invalid={errors.numero ? 'true' : 'false'}
             aria-describedby={errors.numero ? 'erro-numero' : 'ajuda-numero'}
-            {...register('numero')}
+            {...campoNumero}
+            onChange={comMascara(campoNumero, mascaraCartao)}
           />
           {errors.numero ? (
             <p className="campo__erro" id="erro-numero" role="alert">
@@ -123,7 +143,8 @@ function Pagamento() {
               placeholder="MM/AA"
               aria-invalid={errors.validade ? 'true' : 'false'}
               aria-describedby={errors.validade ? 'erro-validade' : undefined}
-              {...register('validade')}
+              {...campoValidade}
+              onChange={comMascara(campoValidade, mascaraValidade)}
             />
             {errors.validade && (
               <p className="campo__erro" id="erro-validade" role="alert">
@@ -143,7 +164,8 @@ function Pagamento() {
               placeholder="000"
               aria-invalid={errors.cvv ? 'true' : 'false'}
               aria-describedby={errors.cvv ? 'erro-cvv' : undefined}
-              {...register('cvv')}
+              {...campoCvv}
+              onChange={comMascara(campoCvv, (valor) => somenteDigitos(valor, 3))}
             />
             {errors.cvv && (
               <p className="campo__erro" id="erro-cvv" role="alert">

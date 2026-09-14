@@ -21,23 +21,27 @@ function Carrinho() {
         </p>
       </header>
 
-      <section aria-labelledby="produtos-titulo">
-        <h2 id="produtos-titulo" className="sr-only">
-          Produtos do carrinho
-        </h2>
+      <div className="checkout">
+        <section className="checkout__principal" aria-labelledby="produtos-titulo">
+          <h2 id="produtos-titulo" className="sr-only">
+            Produtos do carrinho
+          </h2>
 
-        <ul className="lista-carrinho">
-          {produtos.map((produto) => (
-            <ItemCarrinho key={produto.id} produto={produto} />
-          ))}
-        </ul>
-      </section>
+          <ul className="lista-carrinho">
+            {produtos.map((produto) => (
+              <ItemCarrinho key={produto.id} produto={produto} />
+            ))}
+          </ul>
+        </section>
 
-      <ResumoCompra quantidadeItens={quantidadeItens} total={total} />
+        <div className="checkout__visual">
+          <ResumoCompra quantidadeItens={quantidadeItens} total={total} />
 
-      <Link className="botao botao--primario" to="/pagamento">
-        Finalizar compra
-      </Link>
+          <Link className="botao botao--primario" to="/pagamento">
+            Finalizar compra
+          </Link>
+        </div>
+      </div>
     </main>
   )
 }

@@ -66,6 +66,8 @@ A validação acontece em duas etapas independentes:
 
 Não há validação de bandeira, algoritmo de Luhn ou data de vencimento — o enunciado dispensa esses casos.
 
+Enquanto o usuário digita, uma **prévia do cartão** ao lado do formulário vai sendo preenchida em tempo real com o número, o titular e a validade. Ela usa o `watch()` do React Hook Form, que devolve o valor atual dos campos a cada tecla. O bloco é decorativo e recebe `aria-hidden`, para que leitores de tela não leiam a mesma informação duas vezes.
+
 Os três campos numéricos têm **máscara de digitação**: o número do cartão é agrupado de quatro em quatro automaticamente, a validade recebe a barra sozinha e o CVV aceita apenas três dígitos. As máscaras apenas formatam o que aparece na tela — quem valida continua sendo o schema do Zod, que remove espaços e hífens antes de contar os dígitos.
 
 **2. Regra de negócio** (`src/utils/pagamento.js`) — depois que o formato é aprovado, a aplicação verifica se **os 16 dígitos do cartão são todos iguais**:
@@ -80,16 +82,16 @@ A verificação considera **apenas o número do cartão**, não a repetição en
 | Conteúdo do semestre | Onde está demonstrado |
 | --- | --- |
 | React, componentes funcionais e JSX | Todas as páginas em `src/pages/` |
-| Props e composição | `ItemCarrinho` e `ResumoCompra` recebem dados exclusivamente por props |
+| Props e composição | `ItemCarrinho`, `ResumoCompra`, `CartaoPreview` e `ProdutoImagem` recebem dados exclusivamente por props |
 | Listas e `key` | `produtos.map()` em `Carrinho.jsx`, com `key={produto.id}` (id estável, não índice) |
 | Objetos, arrays e métodos | `map`, `reduce` e `filter` em `src/utils/pagamento.js` e `Carrinho.jsx` |
 | `useState` | Estado `processando` dentro do custom hook |
 | Eventos e renderização condicional | Envio do formulário, mensagens de erro, máscaras de digitação e texto do botão |
-| React Hook Form + Zod | `Pagamento.jsx` com `zodResolver` e o schema `esquemaCartao` |
+| React Hook Form + Zod | `Pagamento.jsx` com `zodResolver`, o schema `esquemaCartao` e `watch()` alimentando a prévia do cartão |
 | Custom hook | `usePagamento` concentra o processamento e a navegação pós-compra |
 | React Router | Quatro rotas em `App.jsx`, `<Link>` para navegação e `useNavigate()` programático |
 | Promises e `async/await` | `processarCompra` aguarda uma `Promise` com `setTimeout` simulando a operadora |
-| CSS e responsividade | `index.css` mobile-first, com breakpoint em `600px` |
+| CSS e responsividade | `index.css` mobile-first, com breakpoints em `600px` e `900px` (checkout em duas colunas) |
 | Semântica e acessibilidade | `main`, `header`, `section`, `dl`, rótulos associados, `role="alert"`, foco visível |
 | npm, `package.json` e Vite | Scripts `dev`, `build` e `preview` |
 | Git e GitHub | Branch `develop`, feature branches e commits descritivos mesclados na `main` |
@@ -114,8 +116,10 @@ lumina-checkout/
     │   ├── Sucesso.jsx     # confirmação da compra
     │   └── Falha.jsx       # mensagem "tentativa de golpe"
     ├── components/
-    │   ├── ItemCarrinho.jsx  # exibição de um produto via props
-    │   └── ResumoCompra.jsx  # resumo dos valores da compra
+    │   ├── ItemCarrinho.jsx   # exibição de um produto via props
+    │   ├── ResumoCompra.jsx   # resumo dos valores da compra
+    │   ├── CartaoPreview.jsx  # prévia do cartão preenchida em tempo real
+    │   └── ProdutoImagem.jsx  # ilustração SVG de cada produto
     ├── hooks/
     │   └── usePagamento.js   # estado e processamento da compra simulada
     ├── utils/
@@ -166,6 +170,7 @@ Para os testes, use validade `12/29` e CVV `123`.
 ## Acessibilidade e responsividade
 
 - HTML semântico em JSX: `header`, `main`, `section`, `footer`, listas `ul`/`li` e `dl` para os valores.
+- As ilustrações dos produtos e a prévia do cartão são decorativas e usam `aria-hidden`, já que a informação equivalente está no texto e nos campos do formulário.
 - Todo campo tem `<label htmlFor>` associado ao `id` do input.
 - Mensagens de erro usam `role="alert"` e são ligadas ao campo por `aria-describedby`, com `aria-invalid` no input.
 - O status do processamento usa `role="status"` com `aria-live="polite"`, para ser anunciado por leitores de tela.
@@ -220,6 +225,7 @@ Cada feature branch foi mesclada em `develop` com `--no-ff`, preservando o hist�
 - Adicionar testes automatizados das regras de negócio com Vitest.
 - Implementar a rota dinâmica de resultado (`/resultado/:status`), unificando as telas de sucesso e falha — o bônus sugerido no enunciado.
 - Incluir tema escuro respeitando `prefers-color-scheme`.
+- Substituir as ilustrações SVG por fotos reais dos produtos, vindas da API.
 
 ---
 

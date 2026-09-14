@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import ResumoCompra from '../components/ResumoCompra'
+import CartaoPreview from '../components/CartaoPreview'
 import { usePagamento } from '../hooks/usePagamento'
 import { produtos } from '../data/produtos'
 import {
@@ -51,12 +52,21 @@ function Pagamento() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors }
   } = useForm({
     resolver: zodResolver(esquemaCartao),
     mode: 'onSubmit',
     defaultValues: { titular: '', numero: '', validade: '', cvv: '' }
   })
+
+  // O watch do React Hook Form devolve o valor atual dos campos a cada
+  // digitacao. E com ele que a previa do cartao vai sendo preenchida.
+  const [numeroDigitado, titularDigitado, validadeDigitada] = watch([
+    'numero',
+    'titular',
+    'validade'
+  ])
 
   // Registros dos campos com mascara. A formatacao acontece antes de o
   // React Hook Form receber o valor, entao o estado do formulario e o que
@@ -81,112 +91,122 @@ function Pagamento() {
         </p>
       </header>
 
-      <ResumoCompra
-        quantidadeItens={quantidadeItens}
-        total={total}
-        titulo="Valor a pagar"
-      />
-
-      <form className="formulario" onSubmit={handleSubmit(processarCompra)} noValidate>
-        <div className="campo">
-          <label htmlFor="titular">Nome do titular</label>
-          <input
-            id="titular"
-            type="text"
-            autoComplete="off"
-            placeholder="Como aparece no cartao"
-            aria-invalid={errors.titular ? 'true' : 'false'}
-            aria-describedby={errors.titular ? 'erro-titular' : undefined}
-            {...register('titular')}
+      <div className="checkout">
+        <div className="checkout__visual">
+          <CartaoPreview
+            numero={numeroDigitado}
+            titular={titularDigitado}
+            validade={validadeDigitada}
           />
-          {errors.titular && (
-            <p className="campo__erro" id="erro-titular" role="alert">
-              {errors.titular.message}
-            </p>
-          )}
+
+          <ResumoCompra
+            quantidadeItens={quantidadeItens}
+            total={total}
+            titulo="Valor a pagar"
+          />
         </div>
 
-        <div className="campo">
-          <label htmlFor="numero">Numero do cartao</label>
-          <input
-            id="numero"
-            type="text"
-            inputMode="numeric"
-            maxLength={19}
-            autoComplete="off"
-            placeholder="0000 0000 0000 0000"
-            aria-invalid={errors.numero ? 'true' : 'false'}
-            aria-describedby={errors.numero ? 'erro-numero' : 'ajuda-numero'}
-            {...campoNumero}
-            onChange={comMascara(campoNumero, mascaraCartao)}
-          />
-          {errors.numero ? (
-            <p className="campo__erro" id="erro-numero" role="alert">
-              {errors.numero.message}
-            </p>
-          ) : (
-            <p className="campo__ajuda" id="ajuda-numero">
-              Espacos e hifens sao ignorados.
-            </p>
-          )}
-        </div>
-
-        <div className="campo-duplo">
+        <form className="formulario" onSubmit={handleSubmit(processarCompra)} noValidate>
           <div className="campo">
-            <label htmlFor="validade">Validade</label>
+            <label htmlFor="titular">Nome do titular</label>
             <input
-              id="validade"
+              id="titular"
               type="text"
-              inputMode="numeric"
-              maxLength={5}
               autoComplete="off"
-              placeholder="MM/AA"
-              aria-invalid={errors.validade ? 'true' : 'false'}
-              aria-describedby={errors.validade ? 'erro-validade' : undefined}
-              {...campoValidade}
-              onChange={comMascara(campoValidade, mascaraValidade)}
+              placeholder="Como aparece no cartao"
+              aria-invalid={errors.titular ? 'true' : 'false'}
+              aria-describedby={errors.titular ? 'erro-titular' : undefined}
+              {...register('titular')}
             />
-            {errors.validade && (
-              <p className="campo__erro" id="erro-validade" role="alert">
-                {errors.validade.message}
+            {errors.titular && (
+              <p className="campo__erro" id="erro-titular" role="alert">
+                {errors.titular.message}
               </p>
             )}
           </div>
 
           <div className="campo">
-            <label htmlFor="cvv">CVV</label>
+            <label htmlFor="numero">Numero do cartao</label>
             <input
-              id="cvv"
+              id="numero"
               type="text"
               inputMode="numeric"
-              maxLength={3}
+              maxLength={19}
               autoComplete="off"
-              placeholder="000"
-              aria-invalid={errors.cvv ? 'true' : 'false'}
-              aria-describedby={errors.cvv ? 'erro-cvv' : undefined}
-              {...campoCvv}
-              onChange={comMascara(campoCvv, (valor) => somenteDigitos(valor, 3))}
+              placeholder="0000 0000 0000 0000"
+              aria-invalid={errors.numero ? 'true' : 'false'}
+              aria-describedby={errors.numero ? 'erro-numero' : 'ajuda-numero'}
+              {...campoNumero}
+              onChange={comMascara(campoNumero, mascaraCartao)}
             />
-            {errors.cvv && (
-              <p className="campo__erro" id="erro-cvv" role="alert">
-                {errors.cvv.message}
+            {errors.numero ? (
+              <p className="campo__erro" id="erro-numero" role="alert">
+                {errors.numero.message}
+              </p>
+            ) : (
+              <p className="campo__ajuda" id="ajuda-numero">
+                Espacos e hifens sao ignorados.
               </p>
             )}
           </div>
-        </div>
 
-        <button className="botao botao--primario" type="submit" disabled={processando}>
-          {processando ? 'Processando compra…' : 'Pagar agora'}
-        </button>
+          <div className="campo-duplo">
+            <div className="campo">
+              <label htmlFor="validade">Validade</label>
+              <input
+                id="validade"
+                type="text"
+                inputMode="numeric"
+                maxLength={5}
+                autoComplete="off"
+                placeholder="MM/AA"
+                aria-invalid={errors.validade ? 'true' : 'false'}
+                aria-describedby={errors.validade ? 'erro-validade' : undefined}
+                {...campoValidade}
+                onChange={comMascara(campoValidade, mascaraValidade)}
+              />
+              {errors.validade && (
+                <p className="campo__erro" id="erro-validade" role="alert">
+                  {errors.validade.message}
+                </p>
+              )}
+            </div>
 
-        <p className="formulario__status" role="status" aria-live="polite">
-          {processando ? 'Processando compra…' : ''}
-        </p>
-      </form>
+            <div className="campo">
+              <label htmlFor="cvv">CVV</label>
+              <input
+                id="cvv"
+                type="text"
+                inputMode="numeric"
+                maxLength={3}
+                autoComplete="off"
+                placeholder="000"
+                aria-invalid={errors.cvv ? 'true' : 'false'}
+                aria-describedby={errors.cvv ? 'erro-cvv' : undefined}
+                {...campoCvv}
+                onChange={comMascara(campoCvv, (valor) => somenteDigitos(valor, 3))}
+              />
+              {errors.cvv && (
+                <p className="campo__erro" id="erro-cvv" role="alert">
+                  {errors.cvv.message}
+                </p>
+              )}
+            </div>
+          </div>
 
-      <Link className="link-voltar" to="/">
-        Voltar ao carrinho
-      </Link>
+          <button className="botao botao--primario" type="submit" disabled={processando}>
+            {processando ? 'Processando compra…' : 'Pagar agora'}
+          </button>
+
+          <p className="formulario__status" role="status" aria-live="polite">
+            {processando ? 'Processando compra…' : ''}
+          </p>
+
+          <Link className="link-voltar" to="/">
+            Voltar ao carrinho
+          </Link>
+        </form>
+      </div>
     </main>
   )
 }

@@ -1,3 +1,4 @@
+import ProdutoImagem from './ProdutoImagem'
 import { calcularSubtotal, formatarMoeda } from '../utils/pagamento'
 
 /**
@@ -9,10 +10,12 @@ function ItemCarrinho({ produto }) {
 
   return (
     <li className="item-carrinho">
+      <ProdutoImagem tipo={produto.imagem} />
+
       <div className="item-carrinho__identificacao">
         <h3 className="item-carrinho__nome">{produto.nome}</h3>
         <p className="item-carrinho__detalhe">
-          {formatarMoeda(produto.preco)} <span aria-hidden="true">x</span>
+          {formatarMoeda(produto.preco)} <span aria-hidden="true">&times;</span>
           <span className="sr-only"> vezes </span>
           {produto.quantidade}
         </p>

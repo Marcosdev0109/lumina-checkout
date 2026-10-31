@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import ResumoCompra from '../components/ResumoCompra'
-import CartaoPreview from '../components/CartaoPreview'
+import ResumoCompra from '../components/organisms/ResumoCompra'
+import CartaoPreview from '../components/molecules/CartaoPreview'
 import { usePagamento } from '../hooks/usePagamento'
 import { produtos } from '../data/produtos'
+import { calcularTotal } from '../utils/carrinho'
 import {
-  calcularTotal,
   mascaraCartao,
   mascaraValidade,
   somenteDigitos

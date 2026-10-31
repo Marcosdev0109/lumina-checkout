@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 /**
  * Ilustracao de cada produto (RF12).
  *
@@ -59,6 +60,10 @@ function ProdutoImagem({ tipo }) {
       </svg>
     </div>
   )
+}
+
+ProdutoImagem.propTypes = {
+  tipo: PropTypes.string.isRequired
 }
 
 export default ProdutoImagem

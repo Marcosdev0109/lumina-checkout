@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Checkout em React com carrinho fixo, validacao de cartao e fluxo de pagamento simulado.",
+  "description": "Lumina Store: loja de iluminacao em React com catalogo via json-server, carrinho com Context API e checkout simulado.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

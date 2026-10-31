@@ -1,6 +1,8 @@
-# Lumina Checkout
+# Lumina Store
 
-Aplicação de finalização de compra (checkout) desenvolvida em **React + Vite**, como Mini-Projeto Avaliativo do Módulo 2 — Semana 07 do curso Front-End React (SC Tech / SENAI-SC).
+Loja virtual de iluminação desenvolvida em **React + Vite** como **Projeto Avaliativo do Módulo 2 (Semana 12)** do curso Front-End React (SC Tech / SENAI-SC).
+
+É a evolução do **Lumina Checkout**, o Mini-Projeto da Semana 07: o checkout com carrinho fixo virou uma loja completa, com catálogo vindo de uma API, busca, detalhe do produto, carrinho compartilhado com Context API e o mesmo fluxo de pagamento simulado.
 
 > **Autor:** João Marcos Rodrigues Barbosa
 > **Repositório:** https://github.com/Marcosdev0109/lumina-checkout
@@ -9,125 +11,153 @@ Aplicação de finalização de compra (checkout) desenvolvida em **React + Vite
 
 ## Sumário
 
+- [Links do projeto](#links-do-projeto)
 - [O problema que o sistema resolve](#o-problema-que-o-sistema-resolve)
-- [Demonstração](#demonstração)
-- [Fluxo da aplicação](#fluxo-da-aplicação)
-- [Regra da compra simulada](#regra-da-compra-simulada)
-- [Tecnologias e técnicas utilizadas](#tecnologias-e-técnicas-utilizadas)
-- [Estrutura de pastas](#estrutura-de-pastas)
+- [Funcionalidades](#funcionalidades)
+- [Fluxo do usuário e rotas](#fluxo-do-usuário-e-rotas)
+- [Tecnologias e técnicas](#tecnologias-e-técnicas)
+- [Arquitetura e estrutura de pastas](#arquitetura-e-estrutura-de-pastas)
 - [Como executar](#como-executar)
+- [API simulada (json-server)](#api-simulada-json-server)
+- [Testes](#testes)
+- [Build e deploy](#build-e-deploy)
 - [Acessibilidade e responsividade](#acessibilidade-e-responsividade)
-- [Investigação com o debugger](#investigação-com-o-debugger)
-- [Uso de IA](#uso-de-ia)
 - [Organização das tarefas e versionamento](#organização-das-tarefas-e-versionamento)
+- [Uso de IA](#uso-de-ia)
 - [Melhorias futuras](#melhorias-futuras)
 
 ---
 
+## Links do projeto
+
+| Item | Link |
+| --- | --- |
+| Aplicação publicada (Netlify) | _(inserir o link da Netlify aqui)_ |
+| Quadro do Trello | _(inserir o link do Trello aqui)_ |
+| Vídeo de apresentação (até 7 min) | _(inserir o link do Google Drive aqui)_ |
+
 ## O problema que o sistema resolve
 
-Uma loja virtual de iluminação precisava de uma interface de checkout na qual o cliente pudesse conferir os produtos escolhidos, informar os dados do cartão e receber uma resposta imediata sobre a compra, sem travamentos e sem recarregar a página.
+No Mini-Projeto da Semana 07, a Lumina tinha apenas a etapa final da compra: um carrinho fixo, o formulário do cartão e as telas de sucesso e falha. A loja agora precisava permitir que o cliente **navegasse pelo catálogo, encontrasse o que procura e montasse o próprio carrinho** antes de pagar.
 
-O **Lumina Checkout** resolve isso com uma SPA (Single Page Application) em React: o carrinho é fixo, o pagamento é uma simulação executada inteiramente no navegador e o usuário é levado a uma tela de sucesso ou de falha conforme o resultado. Não há back-end nem integração com operadora de pagamento — nenhum dado do cartão é enviado, persistido ou armazenado.
+A **Lumina Store** fecha esse ciclo de e-commerce: vitrine → busca → detalhe do produto → carrinho → checkout. Os produtos vêm de uma API REST simulada com json-server, o carrinho é controlado por Context API e o pagamento continua sendo **apenas uma simulação no navegador**: nenhum dado de cartão é enviado ou armazenado.
 
-## Demonstração
+## Funcionalidades
 
-**Vídeo de apresentação (até 7 min):** _(inserir o link do Google Drive aqui)_
+**Catálogo e API (Grupo A)**
 
-**Quadro de tarefas no Trello:** https://trello.com/b/56o2RaMZ/lumina-checkout-mini-projeto-m2s07
+- `db.json` com **12 produtos em 4 categorias** (Luminárias de Mesa, Pendentes, Lâmpadas, Fitas e Barras de LED).
+- Página `/produtos` com `fetch` dentro de `useEffect`, tratando **carregamento**, **erro** (API fora do ar, com botão "Tentar novamente") e **lista vazia**.
+- Componente `ProdutoCard` com imagem e texto alternativo, nome, categoria, preço em reais, link para o detalhe e botão "Adicionar ao carrinho".
+- **Busca controlada** que filtra pelo nome enquanto o usuário digita, sem diferenciar maiúsculas, minúsculas e acentos ("lampada" encontra "Lâmpada"). A regra fica em `utils/busca.js` e o resultado é calculado com `useMemo`. Sem resultados, aparece "Nenhum produto encontrado" e o botão "Limpar busca".
+- **Rota dinâmica** `/produtos/:id` com `useParams`, buscando `GET /produtos/:id` e exibindo "Produto não encontrado" quando o id não existe.
 
-## Fluxo da aplicação
+**Carrinho com Context API (Grupo B)**
 
-1. O usuário abre `/` e confere os produtos do carrinho, com preço unitário, quantidade, subtotal de cada item e o total da compra em reais.
-2. Aciona **Finalizar compra** e navega para `/pagamento`, onde o total exibido é exatamente o mesmo do carrinho.
-3. Preenche os dados fictícios do cartão. Erros de formato aparecem abaixo de cada campo e mantêm o usuário no formulário.
-4. Ao enviar, a aplicação exibe **"Processando compra…"** e desabilita o botão, impedindo envios duplicados enquanto a operação assíncrona acontece.
-5. Concluída a simulação, o usuário é encaminhado para `/sucesso` ou para `/falha`.
+- `CarrinhoContext` com Provider envolvendo as rotas e o custom hook `useCarrinho`, expondo `itens`, `adicionarItem`, `alterarQuantidade`, `removerItem`, `limparCarrinho`, `quantidadeTotal` e `valorTotal`.
+- Adicionar soma 1 quando o produto já está no carrinho e **nunca ultrapassa o estoque** (o botão vira "Limite de estoque atingido").
+- Página `/carrinho` com aumentar/diminuir (mínimo 1, máximo o estoque), remover, subtotal de cada item e total em reais. Carrinho vazio mostra mensagem e link para `/produtos`.
+- **Contador no Header** com o `Badge` do Material UI, atualizado em todas as páginas.
 
-| Rota | Tela | Descrição |
+**Pagamento e resultado (Grupo C)**
+
+- Formulário de `/pagamento` com **React Hook Form + Zod** e as mesmas regras do Mini-Projeto: titular preenchido, cartão com 16 dígitos (ignorando espaços e hífens), validade MM/AA com mês entre 01 e 12 e CVV com 3 dígitos. O total vem do `CarrinhoContext`.
+- Processamento assíncrono com "Processando compra..." e botão desabilitado.
+- Cartão com todos os dígitos iguais leva a `/falha` com a mensagem exata **"tentativa de golpe"**; os demais vão para `/sucesso`.
+- **Rota privada**: `/pagamento` só abre com pelo menos um item no carrinho; caso contrário redireciona para `/carrinho`.
+- Compra aprovada **limpa o carrinho**. Na falha os itens são mantidos e o botão "Tentar novamente" volta para `/pagamento`.
+
+**Bônus implementados**
+
+- ⭐ Carrinho persistente no `localStorage` (sobrevive ao recarregar a página).
+- ⭐ Busca sincronizada com a URL (`/produtos?busca=lampada`) com `useSearchParams`.
+- ⭐ Filtro por categoria e ordenação por preço.
+- ⭐ Teste de componente com React Testing Library e relatório de cobertura.
+
+## Fluxo do usuário e rotas
+
+1. Acessar a loja e ser direcionado para `/produtos`, onde a lista é carregada da API.
+2. Buscar, filtrar por categoria ou ordenar por preço.
+3. Abrir o detalhe em `/produtos/:id`.
+4. Adicionar produtos ao carrinho (pelo card ou pelo detalhe) e acompanhar o contador no Header.
+5. Em `/carrinho`, alterar quantidades, remover itens e conferir subtotais e total.
+6. Clicar em "Finalizar compra" e ir para `/pagamento` (apenas com itens no carrinho).
+7. Preencher dados fictícios, enviar e ver "Processando compra...".
+8. Ir para `/sucesso` (carrinho limpo) ou `/falha` com "tentativa de golpe" (carrinho mantido).
+
+| Rota | Página | Observação |
 | --- | --- | --- |
-| `/` | Carrinho | Produtos, subtotais e total da compra |
-| `/pagamento` | Pagamento | Formulário do cartão com validação de formato |
-| `/sucesso` | Sucesso | Confirmação da compra aprovada |
-| `/falha` | Falha | Mensagem `tentativa de golpe` |
+| `/` | — | Redireciona para `/produtos` |
+| `/produtos` | Produtos | Lista da API, busca, filtro e ordenação |
+| `/produtos/:id` | DetalheProduto | Rota dinâmica com `useParams` |
+| `/carrinho` | Carrinho | Itens do `CarrinhoContext` |
+| `/pagamento` | Pagamento | Rota privada (`RotaPrivada` + `Navigate`) |
+| `/sucesso` | Sucesso | Confirma a compra e limpa o carrinho |
+| `/falha` | Falha | "tentativa de golpe" e "Tentar novamente" |
+| `*` | NaoEncontrada | Página 404 com link para `/produtos` |
 
-## Regra da compra simulada
+**Cartões para testar** (dados fictícios):
 
-A validação acontece em duas etapas independentes:
-
-**1. Validação de formato** (React Hook Form + Zod) — o usuário só sai do formulário se todos os campos estiverem corretos:
-
-| Campo | Regra |
+| Número | Resultado |
 | --- | --- |
-| Titular | Preenchido, mínimo de 3 caracteres |
-| Número do cartão | Exatamente 16 dígitos. **Espaços e hífens são desconsiderados** |
-| Validade | Formato `MM/AA`, com mês entre `01` e `12` |
-| CVV | Exatamente 3 dígitos |
+| `4111 1111 1111 1112` | Compra aprovada |
+| `1111 1111 1111 1111` | Falha: "tentativa de golpe" |
 
-Não há validação de bandeira, algoritmo de Luhn ou data de vencimento — o enunciado dispensa esses casos.
+## Tecnologias e técnicas
 
-Enquanto o usuário digita, uma **prévia do cartão** ao lado do formulário vai sendo preenchida em tempo real com o número, o titular e a validade. Ela usa o `watch()` do React Hook Form, que devolve o valor atual dos campos a cada tecla. O bloco é decorativo e recebe `aria-hidden`, para que leitores de tela não leiam a mesma informação duas vezes.
-
-Os três campos numéricos têm **máscara de digitação**: o número do cartão é agrupado de quatro em quatro automaticamente, a validade recebe a barra sozinha e o CVV aceita apenas três dígitos. As máscaras apenas formatam o que aparece na tela — quem valida continua sendo o schema do Zod, que remove espaços e hífens antes de contar os dígitos.
-
-**2. Regra de negócio** (`src/utils/pagamento.js`) — depois que o formato é aprovado, a aplicação verifica se **os 16 dígitos do cartão são todos iguais**:
-
-- Todos iguais (ex.: `5555 5555 5555 5555`) → navega para `/falha` e exibe a mensagem exata **`tentativa de golpe`**.
-- Qualquer outro número com formato válido (ex.: `4111 1111 1111 1111`) → navega para `/sucesso`.
-
-A verificação considera **apenas o número do cartão**, não a repetição entre campos nem entre compras diferentes.
-
-## Tecnologias e técnicas utilizadas
-
-| Conteúdo do semestre | Onde está demonstrado |
+| Conteúdo | Onde aparece |
 | --- | --- |
-| React, componentes funcionais e JSX | Todas as páginas em `src/pages/` |
-| Props e composição | `ItemCarrinho`, `ResumoCompra`, `CartaoPreview` e `ProdutoImagem` recebem dados exclusivamente por props |
-| Listas e `key` | `produtos.map()` em `Carrinho.jsx`, com `key={produto.id}` (id estável, não índice) |
-| Objetos, arrays e métodos | `map`, `reduce` e `filter` em `src/utils/pagamento.js` e `Carrinho.jsx` |
-| `useState` | Estado `processando` dentro do custom hook |
-| Eventos e renderização condicional | Envio do formulário, mensagens de erro, máscaras de digitação e texto do botão |
-| React Hook Form + Zod | `Pagamento.jsx` com `zodResolver`, o schema `esquemaCartao` e `watch()` alimentando a prévia do cartão |
-| Custom hook | `usePagamento` concentra o processamento e a navegação pós-compra |
-| React Router | Quatro rotas em `App.jsx`, `<Link>` para navegação e `useNavigate()` programático |
-| Promises e `async/await` | `processarCompra` aguarda uma `Promise` com `setTimeout` simulando a operadora |
-| CSS e responsividade | `index.css` mobile-first, com breakpoints em `600px` e `900px` (checkout em duas colunas) |
-| Semântica e acessibilidade | `main`, `header`, `section`, `dl`, rótulos associados, `role="alert"`, foco visível |
-| npm, `package.json` e Vite | Scripts `dev`, `build` e `preview` |
-| Git e GitHub | Branch `develop`, feature branches e commits descritivos mesclados na `main` |
-| Módulos ES | `import` / `export` separando páginas, componentes, hooks, dados e regras |
+| Componentes, JSX, props e **PropTypes** | Todos os componentes com props, ex.: `ProdutoCard`, `ItemCarrinho`, `SeletorQuantidade` |
+| Listas com **key** estável e renderização condicional | Grade de produtos, carrinho e mensagens de carregamento/erro/vazio |
+| **useState** e **useEffect** | Busca controlada e carregamento dos produtos (`useProdutos`, `useProduto`) |
+| **fetch** + **json-server** | `src/services/api.js`, com `try/catch` e verificação de `response.ok` |
+| **useRef** | Foca o campo de busca ao abrir `/produtos` |
+| **React Hook Form + Zod** | `FormularioPagamento` e `utils/esquemaCartao.js` |
+| **Context API** e **custom hooks** | `CarrinhoContext` + `useCarrinho`; `useProdutos`, `useProduto`, `usePagamento` |
+| **useMemo** e **useCallback** | Lista filtrada, categorias e totais (`useMemo`); funções do contexto (`useCallback`) |
+| **React Router DOM** | Rota de layout com `Outlet`, rota dinâmica, rota privada e 404 |
+| **CSS Modules** | `Header`, `Footer`, `ProdutoCard`, `ListaProdutos`, `ItemCarrinho`, `SeletorQuantidade`, `Mensagem`, `CampoBusca`, `DetalheProduto` |
+| **Material UI** | `Badge`, `Button`, `TextField` (busca e selects), `MenuItem`, `CircularProgress` e tema próprio |
+| **Atomic Design** | `atoms`, `molecules`, `organisms`, `templates` e `pages` |
+| **Media queries** mobile-first | Grade com 1 coluna no celular, 2 no tablet e 4 no desktop |
+| **Vitest** + **React Testing Library** | Testes das regras em `utils/__tests__` e da página `Produtos` |
 
-**Não foram utilizados:** Context API, biblioteca global de estado, TypeScript, axios, manipulação manual do DOM, back-end ou gateway de pagamento real.
+**Bibliotecas além da lista do enunciado (justificativa):**
 
-## Estrutura de pastas
+- `@emotion/react` e `@emotion/styled`: dependências obrigatórias do Material UI.
+- `jsdom`: simula o navegador para o Vitest rodar os testes de componente.
+- `@testing-library/jest-dom` e `@testing-library/user-event`: matchers como `toBeInTheDocument` e simulação de digitação real nos testes.
+- `@vitest/coverage-v8`: gera o relatório de cobertura (bônus).
+
+## Arquitetura e estrutura de pastas
+
+As páginas nunca chamam `fetch` diretamente: tudo passa pelo serviço `api.js`. O estado do carrinho existe em um único lugar (o contexto), e as regras de negócio são **funções puras** em `utils`, o que permite testá-las sem interface.
 
 ```
 lumina-checkout/
-├── package.json            # dependências e scripts do Vite
-├── vite.config.js          # configuração do Vite
-├── index.html              # HTML base da SPA
-├── README.md               # esta documentação
+├── db.json                  # produtos da API simulada (json-server)
+├── netlify.toml             # build e redirect de SPA na Netlify
+├── .env / .env.production   # VITE_USAR_API alterna json-server e db.json estático
+├── public/
+│   ├── _redirects           # rotas funcionam ao recarregar
+│   └── imagens/             # ilustrações dos produtos
 └── src/
-    ├── main.jsx            # ponto de entrada, BrowserRouter
-    ├── App.jsx             # configuração das quatro rotas
-    ├── pages/
-    │   ├── Carrinho.jsx    # produtos, subtotais e total da compra
-    │   ├── Pagamento.jsx   # formulário com React Hook Form e Zod
-    │   ├── Sucesso.jsx     # confirmação da compra
-    │   └── Falha.jsx       # mensagem "tentativa de golpe"
+    ├── main.jsx             # ThemeProvider + BrowserRouter + CarrinhoProvider
+    ├── App.jsx              # mapa de rotas
     ├── components/
-    │   ├── ItemCarrinho.jsx   # exibição de um produto via props
-    │   ├── ResumoCompra.jsx   # resumo dos valores da compra
-    │   ├── CartaoPreview.jsx  # prévia do cartão preenchida em tempo real
-    │   └── ProdutoImagem.jsx  # ilustração SVG de cada produto
-    ├── hooks/
-    │   └── usePagamento.js   # estado e processamento da compra simulada
-    ├── utils/
-    │   └── pagamento.js      # regras: dígitos iguais, subtotais, total, moeda
-    ├── data/
-    │   └── produtos.js       # array fixo de produtos
-    └── assets/
-        └── styles/index.css   # estilos e responsividade
+    │   ├── atoms/           # Logo, Preco, ImagemProduto, Mensagem, CampoBusca
+    │   ├── molecules/       # ProdutoCard, ItemCarrinho, SeletorQuantidade, FiltrosProdutos, CartaoPreview
+    │   ├── organisms/       # Header, Footer, ListaProdutos, ResumoCompra, FormularioPagamento
+    │   └── templates/       # Layout (Header + Outlet + Footer)
+    ├── pages/               # Produtos, DetalheProduto, Carrinho, Pagamento, Sucesso, Falha, NaoEncontrada
+    │   └── __tests__/       # teste de componente da página Produtos
+    ├── routes/              # RotaPrivada
+    ├── contexts/            # CarrinhoContext
+    ├── hooks/               # useCarrinho, useProdutos, useProduto, usePagamento
+    ├── services/            # api.js
+    ├── utils/               # moeda, carrinho, busca, pagamento, esquemaCartao, armazenamento
+    │   └── __tests__/       # testes unitários das regras de negócio
+    └── assets/styles/       # estilos globais e tema do Material UI
 ```
 
 ## Como executar
@@ -135,98 +165,122 @@ lumina-checkout/
 **Pré-requisitos:** Node.js 18 ou superior e npm.
 
 ```bash
-# 1. Clonar o repositório
+# 1. Clonar e instalar
 git clone https://github.com/Marcosdev0109/lumina-checkout.git
 cd lumina-checkout
-
-# 2. Instalar as dependências
 npm install
 
-# 3. Rodar em modo de desenvolvimento
+# 2. Em um terminal, subir a API simulada (porta 3001)
+npm run api
+
+# 3. Em outro terminal, subir a aplicação (porta 5173)
 npm run dev
 ```
 
-A aplicação abre em `http://localhost:5173`.
+Acesse http://localhost:5173.
 
-Para gerar e conferir a versão de produção:
+| Script | O que faz |
+| --- | --- |
+| `npm run dev` | Inicia a aplicação com o Vite |
+| `npm run api` | Inicia o json-server com o `db.json` na porta 3001 |
+| `npm test` | Executa os testes uma vez |
+| `npm run test:watch` | Executa os testes em modo observação |
+| `npm run test:coverage` | Gera o relatório de cobertura |
+| `npm run build` | Gera a versão de produção em `dist/` |
+| `npm run preview` | Serve localmente a versão de produção |
+
+## API simulada (json-server)
+
+| Endpoint | Descrição |
+| --- | --- |
+| `GET /produtos` | Lista todos os produtos |
+| `GET /produtos/:id` | Retorna um produto (status 404 se não existir) |
+
+Cada produto tem `id`, `nome`, `descricao`, `preco`, `categoria`, `imagem` e `estoque`.
+
+**Variáveis de ambiente:**
+
+| Variável | Valor | Efeito |
+| --- | --- | --- |
+| `VITE_USAR_API` | `true` (arquivo `.env`, desenvolvimento) | Usa o json-server em `VITE_URL_API` |
+| `VITE_USAR_API` | `false` (arquivo `.env.production`, deploy) | Lê o `db.json` estático e filtra no front-end |
+| `VITE_URL_API` | `http://localhost:3001` | Endereço do json-server |
+
+Como o json-server roda só localmente, a versão publicada usa o `db.json` estático, que é copiado automaticamente para `public/` antes do `dev` e do `build`.
+
+## Testes
+
+Os testes usam **Vitest** (mesma API do Jest: `describe`, `it`, `expect`) e **React Testing Library**.
 
 ```bash
-npm run build     # gera a pasta dist/
-npm run preview   # serve a build em http://localhost:4173
+npm test
 ```
 
-### Cartões para teste
+| Arquivo | O que testa | Caminhos tristes cobertos |
+| --- | --- | --- |
+| `moeda.test.js` | `formatarMoeda` | valores inválidos |
+| `busca.test.js` | `filtrarProdutos`, `normalizarTexto`, filtro e ordenação | termo vazio, nenhum resultado |
+| `carrinho.test.js` | `calcularTotal`, `contarItens`, `limitarQuantidade`, adicionar, alterar, remover | estoque esgotado, quantidade abaixo de 1, id inexistente |
+| `pagamento.test.js` | `todosDigitosIguais`, máscaras e esquema Zod | cartão incompleto, mês 13, CVV inválido |
+| `armazenamento.test.js` | carrinho no `localStorage` | conteúdo corrompido, armazenamento bloqueado |
+| `Produtos.test.jsx` | página de produtos | API fora do ar, busca sem resultado |
 
-| Número | Resultado esperado |
-| --- | --- |
-| `4111 1111 1111 1111` | Compra aprovada → `/sucesso` |
-| `4111-1111-1111-1111` | Compra aprovada (hífens ignorados) |
-| `5555 5555 5555 5555` | `tentativa de golpe` → `/falha` |
-| `0000000000000000` | `tentativa de golpe` → `/falha` |
-| `4111 1111 1111 111` | Erro de formato, permanece no formulário |
+## Build e deploy
 
-Para os testes, use validade `12/29` e CVV `123`.
+```bash
+npm run build
+```
+
+A pasta `dist/` é publicada na **Netlify** com as configurações de `netlify.toml`. O arquivo `public/_redirects` garante que rotas como `/produtos/3` funcionem ao recarregar a página.
 
 ## Acessibilidade e responsividade
 
-- HTML semântico em JSX: `header`, `main`, `section`, `footer`, listas `ul`/`li` e `dl` para os valores.
-- As ilustrações dos produtos e a prévia do cartão são decorativas e usam `aria-hidden`, já que a informação equivalente está no texto e nos campos do formulário.
-- Todo campo tem `<label htmlFor>` associado ao `id` do input.
-- Mensagens de erro usam `role="alert"` e são ligadas ao campo por `aria-describedby`, com `aria-invalid` no input.
-- O status do processamento usa `role="status"` com `aria-live="polite"`, para ser anunciado por leitores de tela.
-- Link **"Pular para o conteúdo"** no topo, visível apenas ao receber foco.
-- Foco sempre visível via `:focus-visible`, com contorno de 3px.
-- Alvos de toque com no mínimo 44px de altura.
-- Layout mobile-first, testado no DevTools em 360px, 390px e 1280px — sem rolagem horizontal em nenhuma largura.
-- Respeito a `prefers-reduced-motion`.
-
-## Investigação com o debugger
-
-Durante o desenvolvimento, cartões digitados com espaços (`4111 1111 1111 1111`) eram recusados pela validação de formato, mesmo tendo 16 dígitos.
-
-**Como investiguei:** coloquei um breakpoint na função `todosDigitosIguais`, em `src/utils/pagamento.js`, pelo painel **Sources** do DevTools, e inspecionei o valor de `numeroCartao` no painel **Scope**. O valor chegava como `"4111 1111 1111 1111"`, com 19 caracteres — ou seja, a limpeza dos espaços não estava sendo aplicada antes da contagem.
-
-**Causa:** a normalização estava sendo feita apenas dentro da regra de negócio, depois da validação do Zod. O schema contava o comprimento da string bruta.
-
-**Correção:** movi a limpeza para dentro do próprio schema, com `.transform((valor) => valor.replace(/[\s-]/g, ''))` antes do `.refine()`, e mantive `normalizarCartao()` também em `todosDigitosIguais`, para que a regra continue correta mesmo se for chamada de outro lugar. Com o breakpoint novamente ativo, confirmei no Scope que o valor passou a chegar com 16 caracteres.
-
-## Uso de IA
-
-Utilizei IA como apoio em pontos específicos, sempre revisando e validando o resultado:
-
-- Rascunho da expressão regular que identifica 16 dígitos iguais (`/^(\d)\1{15}$/`), que testei manualmente com números repetidos e não repetidos antes de aceitar.
-- Sugestões de atributos de acessibilidade (`aria-invalid`, `aria-describedby`, `role="status"`), que conferi na documentação da MDN.
-
-Todo o código foi lido linha a linha e eu consigo explicar cada trecho. Nenhuma sugestão que trouxesse Context API, TypeScript, axios ou back-end foi aceita — essas eram as bandeiras vermelhas definidas no enunciado.
+- HTML semântico (`header`, `nav`, `main`, `article`, `footer`) e link "Pular para o conteúdo".
+- Todos os campos com `label`; erros do formulário anunciados com `role="alert"`.
+- Imagens com texto alternativo; botões de quantidade e remoção com `aria-label` descritivo.
+- Foco visível em todos os elementos interativos.
+- Layout **mobile-first** com media queries em 600px, 900px e 1024px; testado no DevTools em 375px, 768px e 1280px, sem rolagem horizontal.
 
 ## Organização das tarefas e versionamento
 
-O trabalho foi quebrado em tarefas pequenas, cada uma em sua própria feature branch criada a partir de `develop`:
+O planejamento foi feito no **Trello**, com um card por funcionalidade (veja o link no topo). No GitHub:
+
+- `main`: código final entregue.
+- `develop`: concentra os merges durante o desenvolvimento.
+- Uma **feature branch** a partir da `develop` para cada tarefa, mantida após o merge:
 
 | Branch | Objetivo |
 | --- | --- |
-| `feature/estrutura-inicial` | Configuração do Vite, `package.json` e `index.html` |
-| `feature/estilos-base` | CSS mobile-first e ajustes de acessibilidade |
-| `feature/dados-produtos` | Array fixo de produtos e regras de cálculo |
-| `feature/componentes-carrinho` | Componentes `ItemCarrinho` e `ResumoCompra` |
-| `feature/pagina-carrinho` | Tela do carrinho com `map` e `key` estável |
-| `feature/regra-pagamento` | Custom hook `usePagamento` e processamento assíncrono |
-| `feature/formulario-pagamento` | Formulário com React Hook Form e Zod |
-| `feature/telas-resultado` | Telas de sucesso e de falha |
-| `feature/rotas` | React Router e as quatro rotas da SPA |
-| `feature/documentacao` | README do projeto |
+| `feature/estrutura-atomic` | Reorganizar o projeto em Atomic Design, separar utils e adicionar PropTypes |
+| `feature/api-json-server` | Criar `db.json`, script `api`, serviço de API e variáveis de ambiente |
+| `feature/layout-rotas` | Header, Footer, rota de layout com `Outlet` e página 404 |
+| `feature/listagem-produtos` | Hook `useProdutos`, `ProdutoCard`, grade e estados de carregamento/erro/vazio |
+| `feature/busca-produtos` | Busca controlada com `filtrarProdutos` e `useMemo` |
+| `feature/detalhe-produto` | Rota dinâmica `/produtos/:id` |
+| `feature/carrinho-context` | `CarrinhoContext`, `useCarrinho` e regras do carrinho |
+| `feature/pagina-carrinho` | Página do carrinho ligada ao contexto e `Badge` no Header |
+| `feature/checkout-contexto` | Total do contexto, rota privada e finalização da compra |
+| `feature/estilizacao-mui` | Tema e componentes do Material UI, ajustes de estilo |
+| `fix/textos-interface` | Acentuação dos textos e "Processando compra..." exato |
+| `feature/testes-unitarios` | Vitest e testes das regras de negócio |
+| `feature/carrinho-persistente` | Bônus: carrinho no `localStorage` |
+| `feature/filtro-ordenacao` | Bônus: filtro por categoria e ordenação por preço |
+| `feature/busca-na-url` | Bônus: busca na query string |
+| `feature/teste-componente` | Bônus: teste com Testing Library e cobertura |
+| `feature/deploy-netlify` | Configuração de deploy e redirect de SPA |
+| `fix/ajustes-mobile` | Ajustes de layout no celular |
+| `feature/documentacao` | Este README |
 
-Cada feature branch foi mesclada em `develop` com `--no-ff`, preservando o histórico, e ao final `develop` foi mesclada na `main`. As branches não foram excluídas após os merges.
+Os commits seguem mensagens curtas no imperativo ("implementa X", "corrige Y"), com poucos arquivos por commit.
+
+## Uso de IA
+
+Usei o Claude como apoio de engenharia: planejamento (PRD), sugestões de código e revisão. Todo o código sugerido foi conferido, testado (`npm test` e testes de fluxo no navegador) e consigo explicar cada parte. As decisões de arquitetura estão descritas neste README.
 
 ## Melhorias futuras
 
-- Carregar os produtos de uma API real com `fetch` e `useEffect`, tratando os estados de carregamento, lista vazia e erro.
-- Permitir alterar quantidades e remover itens do carrinho.
-- Adicionar testes automatizados das regras de negócio com Vitest.
-- Implementar a rota dinâmica de resultado (`/resultado/:status`), unificando as telas de sucesso e falha — o bônus sugerido no enunciado.
-- Incluir tema escuro respeitando `prefers-color-scheme`.
-- Substituir as ilustrações SVG por fotos reais dos produtos, vindas da API.
-
----
-
-Projeto acadêmico. Todos os dados de pagamento são fictícios e nenhuma transação real é realizada.
+- Tema claro/escuro com um `TemaContext`.
+- Hook `useDebounce` para filtrar só quando o usuário parar de digitar.
+- Paginação ou carregamento sob demanda quando o catálogo crescer.
+- Back-end real com autenticação e histórico de pedidos.
+- Testes de ponta a ponta automatizados (ex.: Playwright) no CI.

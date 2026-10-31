@@ -1,0 +1,112 @@
+{
+  "produtos": [
+    {
+      "id": "1",
+      "nome": "Luminária de Mesa Aurora",
+      "descricao": "Luminária de mesa com cúpula metálica e haste regulável. Luz focada para leitura e estudo.",
+      "preco": 189.9,
+      "categoria": "Luminárias de Mesa",
+      "imagem": "/imagens/luminaria-aurora.svg",
+      "estoque": 5
+    },
+    {
+      "id": "2",
+      "nome": "Luminária Articulada Órbita",
+      "descricao": "Braço articulado em três pontos e base pesada antiderrapante. Ideal para home office.",
+      "preco": 229.9,
+      "categoria": "Luminárias de Mesa",
+      "imagem": "/imagens/luminaria-orbita.svg",
+      "estoque": 3
+    },
+    {
+      "id": "3",
+      "nome": "Luminária Lumi Kids",
+      "descricao": "Luminária compacta com luz quente e toque suave, pensada para o quarto das crianças.",
+      "preco": 99.9,
+      "categoria": "Luminárias de Mesa",
+      "imagem": "/imagens/luminaria-lumi-kids.svg",
+      "estoque": 8
+    },
+    {
+      "id": "4",
+      "nome": "Pendente Cúpula Nórdica",
+      "descricao": "Pendente em madeira clara com cúpula de tecido. Luz difusa para salas de jantar.",
+      "preco": 349.9,
+      "categoria": "Pendentes",
+      "imagem": "/imagens/pendente-nordica.svg",
+      "estoque": 4
+    },
+    {
+      "id": "5",
+      "nome": "Pendente Vidro Âmbar",
+      "descricao": "Cúpula de vidro âmbar soprado que cria um brilho dourado e aconchegante.",
+      "preco": 279.0,
+      "categoria": "Pendentes",
+      "imagem": "/imagens/pendente-ambar.svg",
+      "estoque": 2
+    },
+    {
+      "id": "6",
+      "nome": "Pendente Industrial Trio",
+      "descricao": "Conjunto com três cúpulas metálicas pretas em trilho único. Perfeito para bancadas.",
+      "preco": 459.0,
+      "categoria": "Pendentes",
+      "imagem": "/imagens/pendente-industrial.svg",
+      "estoque": 3
+    },
+    {
+      "id": "7",
+      "nome": "Lâmpada Filamento Vintage",
+      "descricao": "Lâmpada LED com filamento aparente e luz âmbar de 2200K. Estilo retrô com baixo consumo.",
+      "preco": 39.9,
+      "categoria": "Lâmpadas",
+      "imagem": "/imagens/lampada-filamento.svg",
+      "estoque": 20
+    },
+    {
+      "id": "8",
+      "nome": "Lâmpada LED Inteligente Wi-Fi",
+      "descricao": "Controle pelo celular, 16 milhões de cores e compatível com assistentes de voz.",
+      "preco": 79.9,
+      "categoria": "Lâmpadas",
+      "imagem": "/imagens/lampada-wifi.svg",
+      "estoque": 10
+    },
+    {
+      "id": "9",
+      "nome": "Kit 6 Lâmpadas Bulbo LED 9W",
+      "descricao": "Seis lâmpadas bulbo de 9W com luz branca neutra de 4000K para toda a casa.",
+      "preco": 59.9,
+      "categoria": "Lâmpadas",
+      "imagem": "/imagens/lampada-kit-bulbo.svg",
+      "estoque": 15
+    },
+    {
+      "id": "10",
+      "nome": "Fita de LED RGB 5m",
+      "descricao": "Fita de LED adesiva com controle remoto, efeitos de cor e corte a cada 5 cm.",
+      "preco": 129.5,
+      "categoria": "Fitas e Barras de LED",
+      "imagem": "/imagens/fita-led-rgb.svg",
+      "estoque": 6
+    },
+    {
+      "id": "11",
+      "nome": "Barra de LED para Armário",
+      "descricao": "Barra recarregável com sensor de presença. Acende sozinha ao abrir o armário.",
+      "preco": 89.9,
+      "categoria": "Fitas e Barras de LED",
+      "imagem": "/imagens/barra-led-armario.svg",
+      "estoque": 7
+    },
+    {
+      "id": "12",
+      "nome": "Luz Neon Flex 2m",
+      "descricao": "Mangueira neon flexível de silicone para letreiros e decoração. Última unidade.",
+      "preco": 149.9,
+      "categoria": "Fitas e Barras de LED",
+      "imagem": "/imagens/neon-flex.svg",
+      "estoque": 1
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/templates/Layout'
 import Produtos from './pages/Produtos'
+import DetalheProduto from './pages/DetalheProduto'
 import Carrinho from './pages/Carrinho'
 import Pagamento from './pages/Pagamento'
 import Sucesso from './pages/Sucesso'
@@ -17,6 +18,7 @@ function App() {
       <Route element={<Layout />}>
         <Route index element={<Navigate to="/produtos" replace />} />
         <Route path="produtos" element={<Produtos />} />
+        <Route path="produtos/:id" element={<DetalheProduto />} />
         <Route path="carrinho" element={<Carrinho />} />
         <Route path="pagamento" element={<Pagamento />} />
         <Route path="sucesso" element={<Sucesso />} />

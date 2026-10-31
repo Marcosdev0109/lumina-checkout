@@ -13,6 +13,11 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/setupTests.js',
-    css: { modules: { classNameStrategy: 'non-scoped' } }
+    css: { modules: { classNameStrategy: 'non-scoped' } },
+    coverage: {
+      provider: 'v8',
+      include: ['src/utils/**', 'src/pages/Produtos.jsx'],
+      reporter: ['text', 'html']
+    }
   }
 })

@@ -17,3 +17,6 @@ yarn-error.log*
 
 # Copia gerada automaticamente a partir do db.json da raiz
 public/db.json
+
+# Relatorio de cobertura dos testes
+coverage

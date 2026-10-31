@@ -1,0 +1,22 @@
+/* Mobile-first: 1 coluna no celular, 2 no tablet e 4 no desktop (RF15). */
+.grade {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .grade {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grade {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}

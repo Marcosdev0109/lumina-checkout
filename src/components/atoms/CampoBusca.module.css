@@ -1,0 +1,23 @@
+.campo {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.rotulo {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.entrada {
+  width: 100%;
+  font: inherit;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+}
+
+.entrada:focus-visible {
+  border-color: var(--cor-primaria);
+}

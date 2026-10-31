@@ -71,3 +71,9 @@
     justify-content: start;
   }
 }
+
+.noCarrinho {
+  margin: 0;
+  color: var(--cor-sucesso);
+  font-weight: 600;
+}

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 /**
  * Tela de sucesso (rota "/sucesso") - RF10.
- * Confirma a aprovacao da compra simulada e oferece retorno ao carrinho.
+ * Confirma a aprovacao da compra simulada e oferece o retorno ao catalogo.
  */
 function Sucesso() {
   return (
@@ -18,8 +18,8 @@ function Sucesso() {
         foi cobrado e nenhum dado do cartao foi armazenado.
       </p>
 
-      <Link className="botao botao--primario" to="/">
-        Voltar ao carrinho
+      <Link className="botao botao--primario" to="/produtos">
+        Continuar comprando
       </Link>
     </main>
   )

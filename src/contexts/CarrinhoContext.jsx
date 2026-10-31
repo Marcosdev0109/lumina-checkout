@@ -1,4 +1,4 @@
-import { createContext, useCallback, useMemo, useState } from 'react'
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   adicionarAoCarrinho,
@@ -9,6 +9,7 @@ import {
   quantidadeNoCarrinho,
   removerDoCarrinho
 } from '../utils/carrinho'
+import { lerCarrinhoSalvo, salvarCarrinho } from '../utils/armazenamento'
 
 /**
  * Contexto do carrinho (RF06).
@@ -18,7 +19,13 @@ import {
 export const CarrinhoContext = createContext(null)
 
 export function CarrinhoProvider({ children }) {
-  const [itens, setItens] = useState([])
+  // Inicializacao preguicosa: le o localStorage so na primeira renderizacao.
+  const [itens, setItens] = useState(() => lerCarrinhoSalvo())
+
+  // Bonus: sempre que o carrinho muda, ele e salvo para sobreviver ao recarregar.
+  useEffect(() => {
+    salvarCarrinho(itens)
+  }, [itens])
 
   // useCallback: as funcoes mantem a mesma referencia entre renderizacoes,
   // entao os componentes que as recebem nao sao recriados a toa.

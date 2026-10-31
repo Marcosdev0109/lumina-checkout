@@ -18,8 +18,8 @@ function Carrinho() {
           <h1>Seu carrinho</h1>
         </header>
 
-        <Mensagem tipo="vazio" titulo="Seu carrinho esta vazio.">
-          <p>Escolha seus produtos no catalogo e eles aparecem aqui.</p>
+        <Mensagem tipo="vazio" titulo="Seu carrinho está vazio.">
+          <p>Escolha seus produtos no catálogo e eles aparecem aqui.</p>
           <Link className="botao botao--primario" to="/produtos">
             Ver produtos
           </Link>

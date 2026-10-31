@@ -38,7 +38,7 @@ function Produtos() {
 
     if (erro) {
       return (
-        <Mensagem tipo="erro" titulo="Ops! Nao conseguimos carregar o catalogo.">
+        <Mensagem tipo="erro" titulo="Ops! Não conseguimos carregar o catálogo.">
           <p>{erro}</p>
           <button className="botao botao--primario" type="button" onClick={recarregar}>
             Tentar novamente
@@ -54,7 +54,7 @@ function Produtos() {
     if (produtosFiltrados.length === 0) {
       return (
         <Mensagem tipo="vazio" titulo="Nenhum produto encontrado">
-          <p>Nao encontramos produtos com &quot;{termo}&quot;.</p>
+          <p>Não encontramos produtos com &quot;{termo}&quot;.</p>
           <button className="botao botao--secundario" type="button" onClick={limparBusca}>
             Limpar busca
           </button>
@@ -75,7 +75,7 @@ function Produtos() {
     <main className="pagina pagina--larga" id="conteudo">
       <header className="pagina__cabecalho">
         <h1>Produtos</h1>
-        <p className="pagina__apoio">Iluminacao para todos os ambientes da sua casa.</p>
+        <p className="pagina__apoio">Iluminação para todos os ambientes da sua casa.</p>
       </header>
 
       <div className="barra-filtros">

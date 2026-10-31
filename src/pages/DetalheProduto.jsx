@@ -29,7 +29,7 @@ function DetalheProduto() {
 
     if (erro) {
       return (
-        <Mensagem tipo="erro" titulo="Ops! Nao conseguimos carregar este produto.">
+        <Mensagem tipo="erro" titulo="Ops! Não conseguimos carregar este produto.">
           <p>{erro}</p>
         </Mensagem>
       )
@@ -39,7 +39,7 @@ function DetalheProduto() {
       return (
         <Mensagem tipo="vazio" titulo="Produto não encontrado">
           <Link className="botao botao--primario" to="/produtos">
-            Voltar ao catalogo
+            Voltar ao catálogo
           </Link>
         </Mensagem>
       )
@@ -76,7 +76,7 @@ function DetalheProduto() {
               {disponivel ? 'Adicionar ao carrinho' : 'Limite de estoque atingido'}
             </Button>
             <Link className="botao botao--secundario" to="/produtos">
-              Voltar ao catalogo
+              Voltar ao catálogo
             </Link>
           </div>
         </div>
@@ -86,7 +86,7 @@ function DetalheProduto() {
 
   return (
     <main className="pagina pagina--larga" id="conteudo">
-      <nav className="trilha" aria-label="Trilha de navegacao">
+      <nav className="trilha" aria-label="Trilha de navegação">
         <Link to="/produtos">Produtos</Link>
         <span aria-hidden="true"> / </span>
         <span aria-current="page">{produto?.nome ?? 'Detalhe'}</span>

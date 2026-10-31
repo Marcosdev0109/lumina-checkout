@@ -1,16 +1,32 @@
 import { Link } from 'react-router-dom'
 import ItemCarrinho from '../components/molecules/ItemCarrinho'
 import ResumoCompra from '../components/organisms/ResumoCompra'
-import { produtos } from '../data/produtos'
-import { calcularTotal } from '../utils/carrinho'
+import Mensagem from '../components/atoms/Mensagem'
+import { useCarrinho } from '../hooks/useCarrinho'
 
 /**
- * Tela inicial (rota "/"): resumo do carrinho fixo.
- * Renderiza a lista com map e key estavel (RF03) e leva ao pagamento (RF04).
+ * Pagina do carrinho (rota "/carrinho") - RF08.
+ * Antes lia um array fixo; agora le os itens do CarrinhoContext.
  */
 function Carrinho() {
-  const total = calcularTotal(produtos)
-  const quantidadeItens = produtos.reduce((soma, produto) => soma + produto.quantidade, 0)
+  const { itens, alterarQuantidade, removerItem, quantidadeTotal, valorTotal } = useCarrinho()
+
+  if (itens.length === 0) {
+    return (
+      <main className="pagina" id="conteudo">
+        <header className="pagina__cabecalho">
+          <h1>Seu carrinho</h1>
+        </header>
+
+        <Mensagem tipo="vazio" titulo="Seu carrinho esta vazio.">
+          <p>Escolha seus produtos no catalogo e eles aparecem aqui.</p>
+          <Link className="botao botao--primario" to="/produtos">
+            Ver produtos
+          </Link>
+        </Mensagem>
+      </main>
+    )
+  }
 
   return (
     <main className="pagina" id="conteudo">
@@ -28,17 +44,26 @@ function Carrinho() {
           </h2>
 
           <ul className="lista-carrinho">
-            {produtos.map((produto) => (
-              <ItemCarrinho key={produto.id} produto={produto} />
+            {itens.map((item) => (
+              <ItemCarrinho
+                key={item.id}
+                item={item}
+                onAlterarQuantidade={alterarQuantidade}
+                onRemover={removerItem}
+              />
             ))}
           </ul>
         </section>
 
         <div className="checkout__visual">
-          <ResumoCompra quantidadeItens={quantidadeItens} total={total} />
+          <ResumoCompra quantidadeItens={quantidadeTotal} total={valorTotal} />
 
           <Link className="botao botao--primario" to="/pagamento">
             Finalizar compra
+          </Link>
+
+          <Link className="link-voltar" to="/produtos">
+            Continuar comprando
           </Link>
         </div>
       </div>

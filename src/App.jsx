@@ -7,6 +7,7 @@ import Pagamento from './pages/Pagamento'
 import Sucesso from './pages/Sucesso'
 import Falha from './pages/Falha'
 import NaoEncontrada from './pages/NaoEncontrada'
+import RotaPrivada from './routes/RotaPrivada'
 
 /**
  * Mapa de rotas da loja (RF14).
@@ -20,7 +21,14 @@ function App() {
         <Route path="produtos" element={<Produtos />} />
         <Route path="produtos/:id" element={<DetalheProduto />} />
         <Route path="carrinho" element={<Carrinho />} />
-        <Route path="pagamento" element={<Pagamento />} />
+        <Route
+          path="pagamento"
+          element={
+            <RotaPrivada>
+              <Pagamento />
+            </RotaPrivada>
+          }
+        />
         <Route path="sucesso" element={<Sucesso />} />
         <Route path="falha" element={<Falha />} />
         <Route path="*" element={<NaoEncontrada />} />

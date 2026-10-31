@@ -132,7 +132,12 @@ function FormularioPagamento({ onEnviar, processando, children }) {
         </div>
       </div>
 
-      <button className="botao botao--primario" type="submit" disabled={processando}>
+      <button
+        className="botao botao--primario"
+        type="submit"
+        disabled={processando}
+        aria-busy={processando}
+      >
         {processando ? 'Processando compra…' : 'Pagar agora'}
       </button>
 

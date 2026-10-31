@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import CircularProgress from '@mui/material/CircularProgress'
 import estilos from './Mensagem.module.css'
 
 /**
@@ -13,6 +14,7 @@ function Mensagem({ tipo = 'info', titulo, children }) {
       className={ehErro ? `${estilos.mensagem} ${estilos.erro}` : estilos.mensagem}
       role={ehErro ? 'alert' : 'status'}
     >
+      {tipo === 'carregando' && <CircularProgress size={32} aria-hidden="true" />}
       <p className={estilos.titulo}>{titulo}</p>
       {children}
     </div>

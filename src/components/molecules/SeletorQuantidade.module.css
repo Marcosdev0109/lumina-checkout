@@ -1,0 +1,35 @@
+.seletor {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-superficie);
+}
+
+.botao {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--cor-primaria-escura);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.botao:hover:not(:disabled) {
+  background: var(--cor-fundo);
+}
+
+.botao:disabled {
+  color: var(--cor-borda);
+  cursor: not-allowed;
+}
+
+.valor {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 700;
+}

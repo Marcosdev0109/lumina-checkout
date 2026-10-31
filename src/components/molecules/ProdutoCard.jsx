@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import Button from '@mui/material/Button'
 import ImagemProduto from '../atoms/ImagemProduto'
 import Preco from '../atoms/Preco'
 import estilos from './ProdutoCard.module.css'
@@ -25,14 +26,14 @@ function ProdutoCard({ produto, onAdicionar, podeAdicionar = true }) {
         <Preco className={estilos.preco} valor={produto.preco} />
 
         <div className={estilos.acoes}>
-          <button
-            className="botao botao--primario"
-            type="button"
+          <Button
+            variant="contained"
+            fullWidth
             onClick={() => onAdicionar?.(produto)}
             disabled={!podeAdicionar}
           >
             {podeAdicionar ? 'Adicionar ao carrinho' : 'Limite de estoque atingido'}
-          </button>
+          </Button>
 
           <Link className="botao botao--secundario" to={linkDetalhe}>
             Ver detalhes

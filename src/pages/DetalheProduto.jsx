@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import Button from '@mui/material/Button'
 import Mensagem from '../components/atoms/Mensagem'
 import ImagemProduto from '../components/atoms/ImagemProduto'
 import Preco from '../components/atoms/Preco'
@@ -66,14 +67,14 @@ function DetalheProduto() {
           )}
 
           <div className={estilos.acoes}>
-            <button
-              className="botao botao--primario"
-              type="button"
+            <Button
+              variant="contained"
+              size="large"
               onClick={() => adicionarItem(produto)}
               disabled={!disponivel}
             >
               {disponivel ? 'Adicionar ao carrinho' : 'Limite de estoque atingido'}
-            </button>
+            </Button>
             <Link className="botao botao--secundario" to="/produtos">
               Voltar ao catalogo
             </Link>

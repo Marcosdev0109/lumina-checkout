@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import ProdutoImagem from '../atoms/ProdutoImagem'
 import { calcularSubtotal } from '../../utils/carrinho'
 import { formatarMoeda } from '../../utils/moeda'
@@ -28,6 +29,16 @@ function ItemCarrinho({ produto }) {
       </p>
     </li>
   )
+}
+
+ItemCarrinho.propTypes = {
+  produto: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    nome: PropTypes.string.isRequired,
+    preco: PropTypes.number.isRequired,
+    quantidade: PropTypes.number.isRequired,
+    imagem: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default ItemCarrinho

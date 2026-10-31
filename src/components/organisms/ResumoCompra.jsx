@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { formatarMoeda } from '../../utils/moeda'
 
 /**
@@ -25,6 +26,12 @@ function ResumoCompra({ quantidadeItens, total, titulo = 'Resumo da compra' }) {
       </dl>
     </section>
   )
+}
+
+ResumoCompra.propTypes = {
+  quantidadeItens: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  titulo: PropTypes.string
 }
 
 export default ResumoCompra

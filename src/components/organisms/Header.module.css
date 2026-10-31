@@ -54,3 +54,7 @@
 .ativo {
   color: var(--cor-primaria);
 }
+
+.textoCarrinho {
+  margin-left: 0.25rem;
+}

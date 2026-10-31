@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { todosDigitosIguais } from '../utils/pagamento'
 
 /**
- * Custom hook que concentra o processamento da compra simulada (RF08 / RF09).
+ * Custom hook que concentra o processamento da compra simulada (RF11).
  *
  * Responsabilidades:
  * - controlar o estado "processando" para desabilitar o botao e evitar envios duplicados;

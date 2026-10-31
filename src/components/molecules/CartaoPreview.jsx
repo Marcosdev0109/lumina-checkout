@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 /**
  * Previa visual do cartao (RF12).
  *
@@ -38,6 +39,12 @@ function CartaoPreview({ numero = '', titular = '', validade = '' }) {
       </div>
     </div>
   )
+}
+
+CartaoPreview.propTypes = {
+  numero: PropTypes.string,
+  titular: PropTypes.string,
+  validade: PropTypes.string
 }
 
 export default CartaoPreview

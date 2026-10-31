@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
 /**
- * Tela de falha (rota "/falha") - RF11.
- * Exibe a mensagem exata exigida pelo enunciado: "tentativa de golpe".
+ * Tela de falha (rota "/falha") - RF11 e RF13.
+ * Exibe a mensagem exata "tentativa de golpe" e mantem os itens no carrinho.
  */
 function Falha() {
   return (
@@ -11,19 +11,23 @@ function Falha() {
         !
       </p>
 
-      <h1>Compra nao aprovada</h1>
+      <h1>Compra não aprovada</h1>
 
       <p className="resultado__mensagem" role="alert">
         tentativa de golpe
       </p>
 
       <p className="pagina__apoio">
-        O numero informado foi recusado pela verificacao da loja. Revise os dados
-        do cartao e tente novamente.
+        O número informado foi recusado pela verificação da loja. Revise os dados
+        do cartão e tente novamente.
       </p>
 
       <Link className="botao botao--primario" to="/pagamento">
         Tentar novamente
+      </Link>
+
+      <Link className="link-voltar" to="/carrinho">
+        Revisar carrinho
       </Link>
     </main>
   )

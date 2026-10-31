@@ -1,0 +1,79 @@
+.detalhe {
+  display: grid;
+  gap: 1.5rem;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 1rem;
+}
+
+.imagem {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--raio-pequeno);
+  object-fit: cover;
+}
+
+.informacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.categoria {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cor-texto-suave);
+}
+
+.nome {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.descricao {
+  margin: 0;
+  color: var(--cor-texto-suave);
+}
+
+.preco {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--cor-primaria-escura);
+}
+
+.estoque {
+  margin: 0;
+  font-weight: 600;
+}
+
+.acoes {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .detalhe {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding: 1.5rem;
+    gap: 2rem;
+  }
+
+  .acoes {
+    grid-template-columns: auto auto;
+    justify-content: start;
+  }
+}
+
+.noCarrinho {
+  margin: 0;
+  color: var(--cor-sucesso);
+  font-weight: 600;
+}

@@ -1,15 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { ThemeProvider } from '@mui/material/styles'
 import App from './App'
+import { CarrinhoProvider } from './contexts/CarrinhoContext'
+import { tema } from './assets/styles/tema'
 import './assets/styles/index.css'
 
 // Ponto de entrada da aplicacao.
-// O BrowserRouter fica aqui para que toda a arvore tenha acesso as rotas.
+// ThemeProvider aplica o tema do Material UI, BrowserRouter libera as rotas e o CarrinhoProvider envolve todas elas,
+// para que qualquer pagina consiga ler e alterar o carrinho.
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ThemeProvider theme={tema}>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <CarrinhoProvider>
+          <App />
+        </CarrinhoProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 )

@@ -1,6 +1,7 @@
-/* Lumina Checkout - estilos globais.
-   Abordagem mobile-first: o layout base atende o celular e o breakpoint de
-   900px transforma o checkout em duas colunas no desktop. */
+/* Lumina Store - estilos globais.
+   Abordagem mobile-first: o layout base atende o celular e os breakpoints de
+   600px e 900px adaptam tablet e desktop. Os componentes da loja usam
+   CSS Modules (arquivos .module.css ao lado de cada componente). */
 
 :root {
   --cor-fundo: #f6f5fb;
@@ -71,32 +72,8 @@ body {
   flex-direction: column;
 }
 
-/* ---------- Topo e rodape ---------- */
 
-.topo {
-  background: var(--cor-superficie);
-  border-bottom: 1px solid var(--cor-borda);
-  padding: 0.875rem 1rem;
-}
 
-.topo__marca {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: 1.125rem;
-  letter-spacing: -0.01em;
-  color: var(--cor-texto);
-  text-decoration: none;
-}
-
-.rodape {
-  margin-top: auto;
-  padding: 2rem 1rem;
-  text-align: center;
-  font-size: 0.8125rem;
-  color: var(--cor-texto-suave);
-}
 
 /* ---------- Estrutura das paginas ---------- */
 
@@ -116,6 +93,47 @@ body {
 .pagina__apoio {
   margin: 0 0 1.75rem;
   color: var(--cor-texto-suave);
+}
+
+.pagina--larga {
+  max-width: 1200px;
+}
+
+.barra-filtros {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .barra-filtros {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .barra-filtros > [role='search'] {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .barra-filtros {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .barra-filtros > [role='search'] {
+    grid-column: auto;
+  }
+}
+
+.trilha {
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+.trilha a {
+  color: var(--cor-primaria);
+  font-weight: 600;
 }
 
 .pagina--resultado {
@@ -156,55 +174,11 @@ body {
   gap: 0.75rem;
 }
 
-.item-carrinho {
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio);
-  box-shadow: var(--sombra);
-  padding: 0.875rem;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-areas:
-    'imagem identificacao'
-    'imagem subtotal';
-  align-items: center;
-  gap: 0.25rem 0.875rem;
-}
 
-.produto-imagem {
-  grid-area: imagem;
-  width: 64px;
-  height: 64px;
-  display: grid;
-  place-items: center;
-  border-radius: var(--raio-pequeno);
-  background: linear-gradient(140deg, #efeaff, #fdf3da);
-  color: var(--cor-primaria);
-}
 
-.item-carrinho__identificacao {
-  grid-area: identificacao;
-}
 
-.item-carrinho__nome {
-  margin: 0;
-  font-size: 1rem;
-  letter-spacing: -0.01em;
-}
 
-.item-carrinho__detalhe {
-  margin: 0;
-  color: var(--cor-texto-suave);
-  font-size: 0.875rem;
-}
 
-.item-carrinho__subtotal {
-  grid-area: subtotal;
-  margin: 0;
-  font-weight: 700;
-  font-size: 1.0625rem;
-  font-variant-numeric: tabular-nums;
-}
 
 /* ---------- Resumo ---------- */
 
@@ -440,8 +414,22 @@ body {
   transform: translateY(1px);
 }
 
+.botao--secundario {
+  background: transparent;
+  color: var(--cor-primaria);
+  border: 2px solid var(--cor-primaria);
+}
+
+.botao--secundario:hover {
+  background: #ece8ff;
+}
+
 .botao:disabled {
   background: #a49ada;
+  cursor: not-allowed;
+}
+
+.botao[aria-busy='true'] {
   cursor: progress;
 }
 
@@ -491,11 +479,6 @@ body {
     font-size: 2rem;
   }
 
-  .item-carrinho {
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas: 'imagem identificacao subtotal';
-    padding: 1rem;
-  }
 
   .cartao {
     padding: 1.5rem;
@@ -533,7 +516,7 @@ body {
     grid-column: 2;
     grid-row: 1;
     position: sticky;
-    top: 1.5rem;
+    top: 5.5rem;
   }
 }
 

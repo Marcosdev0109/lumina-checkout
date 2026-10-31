@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import ItemCarrinho from '../components/molecules/ItemCarrinho'
 import ResumoCompra from '../components/organisms/ResumoCompra'
 import { produtos } from '../data/produtos'
-import { calcularTotal } from '../utils/pagamento'
+import { calcularTotal } from '../utils/carrinho'
 
 /**
  * Tela inicial (rota "/"): resumo do carrinho fixo.

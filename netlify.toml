@@ -1,0 +1,15 @@
+# Configuracao de deploy na Netlify.
+# O build usa .env.production (VITE_USAR_API=false): a loja le o db.json estatico,
+# ja que o json-server roda apenas localmente.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA: qualquer rota (ex.: /produtos/3 ao recarregar) devolve o index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

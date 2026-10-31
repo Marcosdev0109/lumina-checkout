@@ -1,10 +1,19 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useCarrinho } from '../hooks/useCarrinho'
 
 /**
- * Tela de sucesso (rota "/sucesso") - RF10.
+ * Tela de sucesso (rota "/sucesso") - RF13.
  * Confirma a aprovacao da compra simulada e oferece o retorno ao catalogo.
  */
 function Sucesso() {
+  const { limparCarrinho } = useCarrinho()
+
+  // Compra aprovada: o carrinho e esvaziado assim que a tela abre (RF13).
+  useEffect(() => {
+    limparCarrinho()
+  }, [limparCarrinho])
+
   return (
     <main className="pagina pagina--resultado" id="conteudo">
       <p className="resultado__icone resultado__icone--sucesso" aria-hidden="true">

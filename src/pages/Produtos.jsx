@@ -3,6 +3,7 @@ import ListaProdutos from '../components/organisms/ListaProdutos'
 import Mensagem from '../components/atoms/Mensagem'
 import CampoBusca from '../components/atoms/CampoBusca'
 import { useProdutos } from '../hooks/useProdutos'
+import { useCarrinho } from '../hooks/useCarrinho'
 import { filtrarProdutos } from '../utils/busca'
 
 /**
@@ -12,6 +13,7 @@ import { filtrarProdutos } from '../utils/busca'
  */
 function Produtos() {
   const { produtos, carregando, erro, recarregar } = useProdutos()
+  const { adicionarItem, podeAdicionarProduto } = useCarrinho()
   const [termo, setTermo] = useState('')
   const campoBuscaRef = useRef(null)
 
@@ -60,7 +62,13 @@ function Produtos() {
       )
     }
 
-    return <ListaProdutos produtos={produtosFiltrados} />
+    return (
+      <ListaProdutos
+        produtos={produtosFiltrados}
+        onAdicionar={adicionarItem}
+        podeAdicionar={podeAdicionarProduto}
+      />
+    )
   }
 
   return (

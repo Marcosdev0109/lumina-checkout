@@ -3,6 +3,7 @@ import Mensagem from '../components/atoms/Mensagem'
 import ImagemProduto from '../components/atoms/ImagemProduto'
 import Preco from '../components/atoms/Preco'
 import { useProduto } from '../hooks/useProduto'
+import { useCarrinho } from '../hooks/useCarrinho'
 import estilos from './DetalheProduto.module.css'
 
 /** Texto de estoque no singular ou no plural. */
@@ -18,6 +19,7 @@ function descreverEstoque(estoque) {
 function DetalheProduto() {
   const { id } = useParams()
   const { produto, carregando, erro } = useProduto(id)
+  const { adicionarItem, podeAdicionarProduto, quantidadeDoProduto } = useCarrinho()
 
   function renderizarConteudo() {
     if (carregando) {
@@ -42,6 +44,9 @@ function DetalheProduto() {
       )
     }
 
+    const disponivel = podeAdicionarProduto(produto)
+    const noCarrinho = quantidadeDoProduto(produto.id)
+
     return (
       <article className={estilos.detalhe} aria-labelledby="produto-nome">
         <ImagemProduto className={estilos.imagem} src={produto.imagem} alt={produto.nome} />
@@ -54,10 +59,20 @@ function DetalheProduto() {
           <p className={estilos.descricao}>{produto.descricao}</p>
           <Preco className={estilos.preco} valor={produto.preco} />
           <p className={estilos.estoque}>{descreverEstoque(produto.estoque)}</p>
+          {noCarrinho > 0 && (
+            <p className={estilos.noCarrinho} role="status">
+              {noCarrinho} no carrinho
+            </p>
+          )}
 
           <div className={estilos.acoes}>
-            <button className="botao botao--primario" type="button" disabled={produto.estoque <= 0}>
-              Adicionar ao carrinho
+            <button
+              className="botao botao--primario"
+              type="button"
+              onClick={() => adicionarItem(produto)}
+              disabled={!disponivel}
+            >
+              {disponivel ? 'Adicionar ao carrinho' : 'Limite de estoque atingido'}
             </button>
             <Link className="botao botao--secundario" to="/produtos">
               Voltar ao catalogo

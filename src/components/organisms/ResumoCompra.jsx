@@ -1,4 +1,4 @@
-import { formatarMoeda } from '../utils/pagamento'
+import { formatarMoeda } from '../../utils/pagamento'
 
 /**
  * Componente reutilizavel com o resumo de valores da compra (RF12).

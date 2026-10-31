@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import ItemCarrinho from '../components/ItemCarrinho'
-import ResumoCompra from '../components/ResumoCompra'
+import ItemCarrinho from '../components/molecules/ItemCarrinho'
+import ResumoCompra from '../components/organisms/ResumoCompra'
 import { produtos } from '../data/produtos'
 import { calcularTotal } from '../utils/pagamento'
 

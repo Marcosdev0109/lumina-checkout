@@ -1,5 +1,5 @@
-import ProdutoImagem from './ProdutoImagem'
-import { calcularSubtotal, formatarMoeda } from '../utils/pagamento'
+import ProdutoImagem from '../atoms/ProdutoImagem'
+import { calcularSubtotal, formatarMoeda } from '../../utils/pagamento'
 
 /**
  * Componente reutilizavel que exibe um produto do carrinho.

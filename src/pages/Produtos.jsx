@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import ListaProdutos from '../components/organisms/ListaProdutos'
 import Mensagem from '../components/atoms/Mensagem'
 import CampoBusca from '../components/atoms/CampoBusca'
@@ -15,7 +16,9 @@ import { filtrarPorCategoria, filtrarProdutos, listarCategorias, ordenarPorPreco
 function Produtos() {
   const { produtos, carregando, erro, recarregar } = useProdutos()
   const { adicionarItem, podeAdicionarProduto } = useCarrinho()
-  const [termo, setTermo] = useState('')
+  // Bonus: o termo comeca com o que estiver na URL (ex.: /produtos?busca=lampada).
+  const [parametrosUrl, setParametrosUrl] = useSearchParams()
+  const [termo, setTermo] = useState(() => parametrosUrl.get('busca') ?? '')
   const [categoria, setCategoria] = useState('')
   const [ordem, setOrdem] = useState('')
   const campoBuscaRef = useRef(null)
@@ -29,6 +32,14 @@ function Produtos() {
     const porCategoria = filtrarPorCategoria(porNome, categoria)
     return ordenarPorPreco(porCategoria, ordem)
   }, [produtos, termo, categoria, ordem])
+
+  // Mantem a URL sincronizada com o campo, sem criar uma entrada nova no historico a cada tecla.
+  useEffect(() => {
+    const termoNaUrl = parametrosUrl.get('busca') ?? ''
+    if (termoNaUrl === termo) return
+
+    setParametrosUrl(termo ? { busca: termo } : {}, { replace: true })
+  }, [termo, parametrosUrl, setParametrosUrl])
 
   // useRef: foca o campo de busca assim que a pagina abre.
   useEffect(() => {

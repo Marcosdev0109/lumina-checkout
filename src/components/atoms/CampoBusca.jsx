@@ -15,7 +15,7 @@ const CampoBusca = forwardRef(function CampoBusca({ valor, onChange, rotulo = 'B
         id="campo-busca"
         label={rotulo}
         type="search"
-        placeholder="Ex.: luminaria, lampada, fita"
+        placeholder="Ex.: luminária, lâmpada, fita"
         autoComplete="off"
         fullWidth
         inputRef={ref}

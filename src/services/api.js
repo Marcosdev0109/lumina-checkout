@@ -9,7 +9,7 @@ const USAR_API = import.meta.env.VITE_USAR_API === 'true'
 const URL_API = import.meta.env.VITE_URL_API || 'http://localhost:3001'
 const URL_ARQUIVO_ESTATICO = `${import.meta.env.BASE_URL}db.json`
 
-const MENSAGEM_FALHA = 'Nao foi possivel carregar os produtos. Verifique se a API esta rodando e tente novamente.'
+const MENSAGEM_FALHA = 'Não foi possível carregar os produtos. Verifique se a API está rodando e tente novamente.'
 
 /** Faz a requisicao e devolve o JSON, tratando falhas de rede e respostas de erro. */
 async function requisitar(url) {

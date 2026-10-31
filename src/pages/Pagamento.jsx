@@ -16,7 +16,7 @@ function Pagamento() {
       <header className="pagina__cabecalho">
         <h1>Pagamento</h1>
         <p className="pagina__apoio">
-          Use dados ficticios. Nenhuma informacao e enviada ou armazenada.
+          Use dados fictícios. Nenhuma informação é enviada ou armazenada.
         </p>
       </header>
 

@@ -23,8 +23,8 @@ function Sucesso() {
       <h1>Compra aprovada</h1>
 
       <p className="pagina__apoio">
-        O pagamento foi processado com sucesso. Esta e uma simulacao: nenhum valor
-        foi cobrado e nenhum dado do cartao foi armazenado.
+        O pagamento foi processado com sucesso. Esta é uma simulação: nenhum valor
+        foi cobrado e nenhum dado do cartão foi armazenado.
       </p>
 
       <Link className="botao botao--primario" to="/produtos">

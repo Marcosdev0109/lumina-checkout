@@ -8,9 +8,9 @@ function NaoEncontrada() {
         404
       </p>
 
-      <h1>Pagina nao encontrada</h1>
+      <h1>Página não encontrada</h1>
 
-      <p className="pagina__apoio">O endereco acessado nao existe ou foi removido.</p>
+      <p className="pagina__apoio">O endereço acessado não existe ou foi removido.</p>
 
       <Link className="botao botao--primario" to="/produtos">
         Ver produtos

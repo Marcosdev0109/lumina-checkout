@@ -10,7 +10,7 @@ function Layout() {
   return (
     <div className="app">
       <a className="pular-conteudo" href="#conteudo">
-        Pular para o conteudo
+        Pular para o conteúdo
       </a>
 
       <Header />

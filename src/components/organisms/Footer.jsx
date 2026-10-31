@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer className={estilos.footer}>
       <p>
-        Lumina Store {anoAtual} - projeto academico SC Tech. Pagamento simulado no navegador.
+        Lumina Store {anoAtual} - projeto acadêmico SC Tech. Pagamento simulado no navegador.
       </p>
     </footer>
   )

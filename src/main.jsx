@@ -13,7 +13,7 @@ import './assets/styles/index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={tema}>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <CarrinhoProvider>
           <App />
         </CarrinhoProvider>

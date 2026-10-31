@@ -24,6 +24,7 @@
   font-size: 1.15rem;
   color: var(--cor-texto);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .navegacao ul {
@@ -55,6 +56,14 @@
   color: var(--cor-primaria);
 }
 
+/* No celular o carrinho mostra so o icone com o contador; o nome continua no aria-label. */
 .textoCarrinho {
+  display: none;
   margin-left: 0.25rem;
+}
+
+@media (min-width: 600px) {
+  .textoCarrinho {
+    display: inline;
+  }
 }

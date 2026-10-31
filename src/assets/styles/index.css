@@ -105,6 +105,26 @@ body {
   margin-bottom: 1.5rem;
 }
 
+@media (min-width: 600px) {
+  .barra-filtros {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .barra-filtros > [role='search'] {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .barra-filtros {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .barra-filtros > [role='search'] {
+    grid-column: auto;
+  }
+}
+
 .trilha {
   margin-bottom: 1.25rem;
   font-size: 0.9rem;

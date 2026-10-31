@@ -202,7 +202,7 @@ function Pagamento() {
             {processando ? 'Processando compra…' : ''}
           </p>
 
-          <Link className="link-voltar" to="/">
+          <Link className="link-voltar" to="/carrinho">
             Voltar ao carrinho
           </Link>
         </form>

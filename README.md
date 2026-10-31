@@ -32,7 +32,7 @@ Loja virtual de iluminação desenvolvida em **React + Vite** como **Projeto Ava
 
 | Item | Link |
 | --- | --- |
-| Aplicação publicada (Netlify) | _(inserir o link da Netlify aqui)_ |
+| Aplicação publicada (Netlify) | https://lumina-store-marcos.netlify.app |
 | Quadro do Trello | https://trello.com/b/LzOY372y/lumina-store-projeto-avaliativo-m2s12 |
 | Vídeo de apresentação (até 7 min) | _(inserir o link do Google Drive aqui)_ |
 

@@ -2,9 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import ListaProdutos from '../components/organisms/ListaProdutos'
 import Mensagem from '../components/atoms/Mensagem'
 import CampoBusca from '../components/atoms/CampoBusca'
+import FiltrosProdutos from '../components/molecules/FiltrosProdutos'
 import { useProdutos } from '../hooks/useProdutos'
 import { useCarrinho } from '../hooks/useCarrinho'
-import { filtrarProdutos } from '../utils/busca'
+import { filtrarPorCategoria, filtrarProdutos, listarCategorias, ordenarPorPreco } from '../utils/busca'
 
 /**
  * Pagina do catalogo (rota "/produtos") - RF02.
@@ -15,11 +16,19 @@ function Produtos() {
   const { produtos, carregando, erro, recarregar } = useProdutos()
   const { adicionarItem, podeAdicionarProduto } = useCarrinho()
   const [termo, setTermo] = useState('')
+  const [categoria, setCategoria] = useState('')
+  const [ordem, setOrdem] = useState('')
   const campoBuscaRef = useRef(null)
 
-  // useMemo: so refaz o filtro quando a lista ou o termo mudam,
+  const categorias = useMemo(() => listarCategorias(produtos), [produtos])
+
+  // useMemo: so refaz o filtro quando a lista, o termo, a categoria ou a ordem mudam,
   // e nao a cada nova renderizacao da pagina.
-  const produtosFiltrados = useMemo(() => filtrarProdutos(produtos, termo), [produtos, termo])
+  const produtosFiltrados = useMemo(() => {
+    const porNome = filtrarProdutos(produtos, termo)
+    const porCategoria = filtrarPorCategoria(porNome, categoria)
+    return ordenarPorPreco(porCategoria, ordem)
+  }, [produtos, termo, categoria, ordem])
 
   // useRef: foca o campo de busca assim que a pagina abre.
   useEffect(() => {
@@ -28,6 +37,7 @@ function Produtos() {
 
   function limparBusca() {
     setTermo('')
+    setCategoria('')
     campoBuscaRef.current?.focus()
   }
 
@@ -54,7 +64,11 @@ function Produtos() {
     if (produtosFiltrados.length === 0) {
       return (
         <Mensagem tipo="vazio" titulo="Nenhum produto encontrado">
-          <p>Não encontramos produtos com &quot;{termo}&quot;.</p>
+          <p>
+            {termo
+              ? `Não encontramos produtos com "${termo}".`
+              : 'Não há produtos nesta categoria.'}
+          </p>
           <button className="botao botao--secundario" type="button" onClick={limparBusca}>
             Limpar busca
           </button>
@@ -80,6 +94,13 @@ function Produtos() {
 
       <div className="barra-filtros">
         <CampoBusca ref={campoBuscaRef} valor={termo} onChange={setTermo} />
+        <FiltrosProdutos
+          categorias={categorias}
+          categoria={categoria}
+          ordem={ordem}
+          onCategoria={setCategoria}
+          onOrdem={setOrdem}
+        />
       </div>
 
       {renderizarConteudo()}

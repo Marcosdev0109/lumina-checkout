@@ -18,7 +18,10 @@ const produtosFalsos = [
 
 function renderizarPagina() {
   return render(
-    <MemoryRouter initialEntries={['/produtos']}>
+    <MemoryRouter
+      initialEntries={['/produtos']}
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       <CarrinhoProvider>
         <Produtos />
       </CarrinhoProvider>

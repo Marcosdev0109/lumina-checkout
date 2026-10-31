@@ -51,7 +51,7 @@ function FormularioPagamento({ onEnviar, processando, children }) {
           id="titular"
           type="text"
           autoComplete="off"
-          placeholder="Como aparece no cartao"
+          placeholder="Como aparece no cartão"
           aria-invalid={errors.titular ? 'true' : 'false'}
           aria-describedby={errors.titular ? 'erro-titular' : undefined}
           {...register('titular')}
@@ -64,7 +64,7 @@ function FormularioPagamento({ onEnviar, processando, children }) {
       </div>
 
       <div className="campo">
-        <label htmlFor="numero">Numero do cartao</label>
+        <label htmlFor="numero">Número do cartão</label>
         <input
           id="numero"
           type="text"
@@ -83,7 +83,7 @@ function FormularioPagamento({ onEnviar, processando, children }) {
           </p>
         ) : (
           <p className="campo__ajuda" id="ajuda-numero">
-            Espacos e hifens sao ignorados.
+            Espaços e hífens são ignorados.
           </p>
         )}
       </div>
@@ -138,11 +138,11 @@ function FormularioPagamento({ onEnviar, processando, children }) {
         disabled={processando}
         aria-busy={processando}
       >
-        {processando ? 'Processando compra…' : 'Pagar agora'}
+        {processando ? 'Processando compra...' : 'Pagar agora'}
       </button>
 
       <p className="formulario__status" role="status" aria-live="polite">
-        {processando ? 'Processando compra…' : ''}
+        {processando ? 'Processando compra...' : ''}
       </p>
 
       <Link className="link-voltar" to="/carrinho">

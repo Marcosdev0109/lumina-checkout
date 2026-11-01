@@ -64,7 +64,8 @@
   font: inherit;
   font-weight: 600;
   cursor: pointer;
-  padding: 0.25rem 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 6px;
 }
 

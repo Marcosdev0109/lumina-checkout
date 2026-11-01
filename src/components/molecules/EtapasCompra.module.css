@@ -1,0 +1,77 @@
+.etapas {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cor-texto-suave);
+}
+
+.etapa {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Linha entre as etapas. */
+.etapa + .etapa::before {
+  content: '';
+  width: clamp(1rem, 6vw, 3rem);
+  height: 2px;
+  border-radius: 2px;
+  background: var(--cor-borda);
+}
+
+.numero {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--cor-borda);
+  background: var(--cor-superficie);
+  font-size: 0.8125rem;
+}
+
+.atual {
+  color: var(--cor-texto);
+}
+
+.atual .numero {
+  border-color: var(--cor-primaria);
+  background: var(--cor-primaria);
+  color: #fff;
+}
+
+.concluida {
+  color: var(--cor-texto);
+}
+
+.concluida .numero {
+  border-color: var(--cor-acento);
+  background: var(--cor-acento-suave);
+  color: var(--cor-acento-texto);
+}
+
+.concluida + .etapa::before,
+.concluida + .atual::before {
+  background: var(--cor-acento);
+}
+
+/* No celular mostra so o nome da etapa atual para caber na tela. */
+.nome {
+  display: none;
+}
+
+.atual .nome {
+  display: inline;
+}
+
+@media (min-width: 600px) {
+  .nome {
+    display: inline;
+  }
+}

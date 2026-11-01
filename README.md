@@ -14,6 +14,7 @@ Loja virtual de iluminação desenvolvida em **React + Vite** como **Projeto Ava
 - [Links do projeto](#links-do-projeto)
 - [O problema que o sistema resolve](#o-problema-que-o-sistema-resolve)
 - [Funcionalidades](#funcionalidades)
+- [Identidade visual](#identidade-visual)
 - [Fluxo do usuário e rotas](#fluxo-do-usuário-e-rotas)
 - [Tecnologias e técnicas](#tecnologias-e-técnicas)
 - [Arquitetura e estrutura de pastas](#arquitetura-e-estrutura-de-pastas)
@@ -75,6 +76,20 @@ A **Lumina Store** fecha esse ciclo de e-commerce: vitrine → busca → detalhe
 - ⭐ Filtro por categoria e ordenação por preço.
 - ⭐ Teste de componente com React Testing Library e relatório de cobertura.
 
+## Identidade visual
+
+O visual foi redesenhado para combinar com as fotos dos produtos e deixar o produto em primeiro plano.
+
+| Elemento | Decisão |
+|----------|---------|
+| **Paleta "luz quente"** | Fundo off-white `#faf7f2`, texto e superfícies em grafite `#1c1917` e acento em latão `#d6a04a`, definidos como variáveis CSS em `index.css` e repetidos no tema do Material UI (`tema.js`) |
+| **Tipografia** | Inter no texto e Fraunces nos títulos (Google Fonts), com `theme-color` do navegador na cor de fundo |
+| **Marca** | Logo com pendente e feixe de luz; header translúcido com o carrinho em formato de pílula; rodapé em grafite |
+| **Catálogo** | Faixa de destaque com foto de ambiente (`DestaqueCatalogo`) e chips de categoria com o `Chip` do Material UI (`ChipsCategorias`) |
+| **Card de produto** | Uma ação principal ("Adicionar ao carrinho", grafite `#44403c`) e uma secundária ("Ver detalhes", borda fina), as duas com 44px de altura; o nome reserva duas linhas para preço e botões ficarem alinhados em todos os cards |
+| **Checkout** | Prévia realista do cartão, que vira para o verso ao preencher o CVV (`CartaoPreview`), e indicador das etapas da compra no carrinho, no pagamento e no sucesso (`EtapasCompra`) |
+| **Movimento** | Cards sobem levemente ao passar o mouse ou receber foco; tudo é desligado para quem ativa "reduzir movimento" |
+
 ## Fluxo do usuário e rotas
 
 1. Acessar a loja e ser direcionado para `/produtos`, onde a lista é carregada da API.
@@ -117,8 +132,8 @@ A **Lumina Store** fecha esse ciclo de e-commerce: vitrine → busca → detalhe
 | **Context API** e **custom hooks** | `CarrinhoContext` + `useCarrinho`; `useProdutos`, `useProduto`, `usePagamento` |
 | **useMemo** e **useCallback** | Lista filtrada, categorias e totais (`useMemo`); funções do contexto (`useCallback`) |
 | **React Router DOM** | Rota de layout com `Outlet`, rota dinâmica, rota privada e 404 |
-| **CSS Modules** | `Header`, `Footer`, `ProdutoCard`, `ListaProdutos`, `ItemCarrinho`, `SeletorQuantidade`, `Mensagem`, `CampoBusca`, `DetalheProduto` |
-| **Material UI** | `Badge`, `Button`, `TextField` (busca e selects), `MenuItem`, `CircularProgress` e tema próprio |
+| **CSS Modules** | `Header`, `Footer`, `ProdutoCard`, `ListaProdutos`, `ItemCarrinho`, `SeletorQuantidade`, `Mensagem`, `CampoBusca`, `DetalheProduto`, `DestaqueCatalogo`, `ChipsCategorias`, `EtapasCompra`, `CartaoPreview` |
+| **Material UI** | `Badge`, `Button`, `Chip` (categorias), `TextField` (busca e ordenação), `MenuItem`, `CircularProgress` e tema próprio |
 | **Atomic Design** | `atoms`, `molecules`, `organisms`, `templates` e `pages` |
 | **Media queries** mobile-first | Grade com 1 coluna no celular, 2 no tablet e 4 no desktop |
 | **Vitest** + **React Testing Library** | Testes das regras em `utils/__tests__` e da página `Produtos` |
@@ -127,6 +142,7 @@ A **Lumina Store** fecha esse ciclo de e-commerce: vitrine → busca → detalhe
 
 - `@emotion/react` e `@emotion/styled`: dependências obrigatórias do Material UI.
 - `jsdom`: simula o navegador para o Vitest rodar os testes de componente.
+- `@testing-library/dom`: base da React Testing Library (exigida por ela a partir da versão 16).
 - `@testing-library/jest-dom` e `@testing-library/user-event`: matchers como `toBeInTheDocument` e simulação de digitação real nos testes.
 - `@vitest/coverage-v8`: gera o relatório de cobertura (bônus).
 
@@ -147,8 +163,8 @@ lumina-checkout/
     ├── App.jsx              # mapa de rotas
     ├── components/
     │   ├── atoms/           # Logo, Preco, ImagemProduto, Mensagem, CampoBusca
-    │   ├── molecules/       # ProdutoCard, ItemCarrinho, SeletorQuantidade, FiltrosProdutos, CartaoPreview
-    │   ├── organisms/       # Header, Footer, ListaProdutos, ResumoCompra, FormularioPagamento
+    │   ├── molecules/       # ProdutoCard, ItemCarrinho, SeletorQuantidade, FiltrosProdutos, ChipsCategorias, CartaoPreview, EtapasCompra
+    │   ├── organisms/       # Header, Footer, DestaqueCatalogo, ListaProdutos, ResumoCompra, FormularioPagamento
     │   └── templates/       # Layout (Header + Outlet + Footer)
     ├── pages/               # Produtos, DetalheProduto, Carrinho, Pagamento, Sucesso, Falha, NaoEncontrada
     │   └── __tests__/       # teste de componente da página Produtos
@@ -240,7 +256,7 @@ A pasta `dist/` é publicada na **Netlify** com as configurações de `netlify.t
 - Todos os campos com `label`; erros do formulário anunciados com `role="alert"`.
 - Imagens com texto alternativo; botões de quantidade e remoção com `aria-label` descritivo.
 - Foco visível em todos os elementos interativos.
-- Layout **mobile-first** com media queries em 600px, 900px e 1024px; testado no DevTools em 375px, 768px e 1280px, sem rolagem horizontal.
+- Layout **mobile-first** com media queries em 600px, 768px, 900px e 1024px (e um ajuste do header abaixo de 380px); testado no DevTools em 375px, 768px e 1280px, sem rolagem horizontal.
 
 ## Organização das tarefas e versionamento
 
@@ -271,6 +287,11 @@ O planejamento foi feito no **Trello**, com um card por funcionalidade (veja o l
 | `feature/deploy-netlify` | Configuração de deploy e redirect de SPA |
 | `fix/ajustes-mobile` | Ajustes de layout no celular |
 | `feature/documentacao` | Este README |
+| `feature/imagens-reais` | Fotos reais do Unsplash no lugar das ilustrações e imagem reserva |
+| `feature/revisao-ui-ux` | Revisão de UI/UX e acessibilidade (áreas de toque de 44px, contraste, auditoria axe) |
+| `feature/identidade-visual` | Paleta "luz quente", fontes Inter e Fraunces, novo logo e header |
+| `feature/catalogo-moderno` | Faixa de destaque, chips de categoria e rodapé em grafite |
+| `feature/checkout-moderno` | Prévia realista do cartão, etapas da compra e refinamento dos cards de produto |
 
 Os commits seguem mensagens curtas no imperativo ("implementa X", "corrige Y"), com poucos arquivos por commit.
 

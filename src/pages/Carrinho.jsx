@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import ItemCarrinho from '../components/molecules/ItemCarrinho'
 import ResumoCompra from '../components/organisms/ResumoCompra'
 import Mensagem from '../components/atoms/Mensagem'
+import EtapasCompra from '../components/molecules/EtapasCompra'
 import { useCarrinho } from '../hooks/useCarrinho'
 
 /**
@@ -30,6 +31,7 @@ function Carrinho() {
 
   return (
     <main className="pagina" id="conteudo">
+      <EtapasCompra etapaAtual={1} />
       <header className="pagina__cabecalho">
         <h1>Seu carrinho</h1>
         <p className="pagina__apoio">

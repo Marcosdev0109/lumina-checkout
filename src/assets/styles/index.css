@@ -131,7 +131,12 @@ body {
 .pagina--resultado {
   max-width: 520px;
   text-align: center;
-  padding-top: 3.5rem;
+  padding-top: 2rem;
+}
+
+.pagina--resultado [aria-label='Etapas da compra'] {
+  justify-content: center;
+  margin-bottom: 2.5rem;
 }
 
 /* Grade do checkout: uma coluna no celular, duas no desktop.
@@ -207,82 +212,6 @@ body {
   font-weight: 700;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-}
-
-/* ---------- Previa do cartao ---------- */
-
-.cartao {
-  background: linear-gradient(135deg, #3a2a8c 0%, #4f33e0 55%, #5b3df5 100%);
-  color: #fff;
-  border-radius: var(--raio);
-  box-shadow: var(--sombra-forte);
-  padding: 1rem;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-}
-
-.cartao__topo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.cartao__chip {
-  width: 42px;
-  height: 30px;
-  border-radius: 6px;
-  background: linear-gradient(140deg, var(--cor-destaque), #d9a01f);
-}
-
-.cartao__marca {
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  opacity: 1;
-}
-
-.cartao__numero {
-  margin: 0;
-  font-size: clamp(0.95rem, 4.4vw, 1.1875rem);
-  letter-spacing: 0.04em;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.cartao__rodape {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.cartao__campo {
-  min-width: 0;
-}
-
-.cartao__campo--validade {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.cartao__rotulo {
-  display: block;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 1;
-}
-
-.cartao__valor {
-  margin: 0.125rem 0 0;
-  font-size: clamp(0.8125rem, 3.4vw, 0.9375rem);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* ---------- Formulario ---------- */
@@ -463,15 +392,6 @@ body {
 
   .pagina__cabecalho h1 {
     font-size: 2rem;
-  }
-
-  .cartao {
-    padding: 1.5rem;
-    min-height: 210px;
-  }
-
-  .cartao__numero {
-    font-size: 1.375rem;
   }
 
   .formulario,

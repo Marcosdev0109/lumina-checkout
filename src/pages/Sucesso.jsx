@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useCarrinho } from '../hooks/useCarrinho'
+import EtapasCompra from '../components/molecules/EtapasCompra'
 
 /**
  * Tela de sucesso (rota "/sucesso") - RF13.
@@ -16,6 +17,7 @@ function Sucesso() {
 
   return (
     <main className="pagina pagina--resultado" id="conteudo">
+      <EtapasCompra etapaAtual={3} />
       <p className="resultado__icone resultado__icone--sucesso" aria-hidden="true">
         &#10003;
       </p>

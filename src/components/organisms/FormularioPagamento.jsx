@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -31,7 +32,15 @@ function FormularioPagamento({ onEnviar, processando, children }) {
   })
 
   // watch devolve o valor atual dos campos a cada digitacao: alimenta a previa do cartao.
-  const [numeroDigitado, titularDigitado, validadeDigitada] = watch(['numero', 'titular', 'validade'])
+  const [numeroDigitado, titularDigitado, validadeDigitada, cvvDigitado] = watch([
+    'numero',
+    'titular',
+    'validade',
+    'cvv'
+  ])
+
+  // Vira o cartao para mostrar o verso enquanto o usuario preenche o CVV.
+  const [cartaoVirado, setCartaoVirado] = useState(false)
 
   const campoNumero = register('numero')
   const campoValidade = register('validade')
@@ -40,7 +49,13 @@ function FormularioPagamento({ onEnviar, processando, children }) {
   return (
     <div className="checkout">
       <div className="checkout__visual">
-        <CartaoPreview numero={numeroDigitado} titular={titularDigitado} validade={validadeDigitada} />
+        <CartaoPreview
+          numero={numeroDigitado}
+          titular={titularDigitado}
+          validade={validadeDigitada}
+          cvv={cvvDigitado}
+          virado={cartaoVirado}
+        />
         {children}
       </div>
 
@@ -123,6 +138,11 @@ function FormularioPagamento({ onEnviar, processando, children }) {
             aria-describedby={errors.cvv ? 'erro-cvv' : undefined}
             {...campoCvv}
             onChange={comMascara(campoCvv, (valor) => somenteDigitos(valor, 3))}
+            onFocus={() => setCartaoVirado(true)}
+            onBlur={(evento) => {
+              setCartaoVirado(false)
+              campoCvv.onBlur(evento)
+            }}
           />
           {errors.cvv && (
             <p className="campo__erro" id="erro-cvv" role="alert">

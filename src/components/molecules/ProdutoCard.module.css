@@ -52,11 +52,18 @@
 .nome a {
   color: var(--cor-texto);
   text-decoration: none;
+  transition: color 0.2s ease-out;
 }
 
+/* Ao passar o mouse, o nome muda para o latao, sem sublinhado. */
 .nome a:hover {
-  color: var(--cor-primaria);
+  color: var(--cor-acento-texto);
+}
+
+/* Pelo teclado o sublinhado aparece, para o foco ficar bem claro. */
+.nome a:focus-visible {
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .preco {

@@ -226,7 +226,7 @@ body {
 /* ---------- Previa do cartao ---------- */
 
 .cartao {
-  background: linear-gradient(135deg, #3a2a8c 0%, #5b3df5 55%, #8f6bff 100%);
+  background: linear-gradient(135deg, #3a2a8c 0%, #4f33e0 55%, #5b3df5 100%);
   color: #fff;
   border-radius: var(--raio);
   box-shadow: var(--sombra-forte);
@@ -254,7 +254,7 @@ body {
 .cartao__marca {
   font-weight: 700;
   letter-spacing: 0.04em;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .cartao__numero {
@@ -283,10 +283,10 @@ body {
 
 .cartao__rotulo {
   display: block;
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .cartao__valor {

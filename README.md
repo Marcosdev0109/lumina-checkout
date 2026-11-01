@@ -24,6 +24,7 @@ Loja virtual de iluminação desenvolvida em **React + Vite** como **Projeto Ava
 - [Acessibilidade e responsividade](#acessibilidade-e-responsividade)
 - [Organização das tarefas e versionamento](#organização-das-tarefas-e-versionamento)
 - [Uso de IA](#uso-de-ia)
+- [Créditos das imagens](#créditos-das-imagens)
 - [Melhorias futuras](#melhorias-futuras)
 
 ---
@@ -140,7 +141,7 @@ lumina-checkout/
 ├── .env / .env.production   # VITE_USAR_API alterna json-server e db.json estático
 ├── public/
 │   ├── _redirects           # rotas funcionam ao recarregar
-│   └── imagens/             # ilustrações dos produtos
+│   └── imagens/             # imagem reserva (sem-foto.svg)
 └── src/
     ├── main.jsx             # ThemeProvider + BrowserRouter + CarrinhoProvider
     ├── App.jsx              # mapa de rotas
@@ -276,6 +277,25 @@ Os commits seguem mensagens curtas no imperativo ("implementa X", "corrige Y"), 
 ## Uso de IA
 
 Usei o Claude como apoio de engenharia: planejamento (PRD), sugestões de código e revisão. Todo o código sugerido foi conferido, testado (`npm test` e testes de fluxo no navegador) e consigo explicar cada parte. As decisões de arquitetura estão descritas neste README.
+
+## Créditos das imagens
+
+As fotos dos produtos são do [Unsplash](https://unsplash.com) e usadas sob a [Licença Unsplash](https://unsplash.com/license), que permite uso gratuito. Se alguma foto não carregar, o componente `ImagemProduto` mostra a imagem reserva local `public/imagens/sem-foto.svg`.
+
+| Produto | Foto original |
+| --- | --- |
+| Luminária de Mesa Aurora | [Unsplash](https://unsplash.com/photos/VDPauwJ_sHo) |
+| Luminária Articulada Órbita | [Unsplash](https://unsplash.com/photos/0WySxD8YeNI) |
+| Luminária Lumi Kids | [Unsplash](https://unsplash.com/photos/mNXTZu7AeGA) |
+| Pendente Cúpula Nórdica | [Rita Chou / Unsplash](https://unsplash.com/photos/aRcwkYv7870) |
+| Pendente Vidro Âmbar | [Ellephant / Unsplash](https://unsplash.com/photos/3CAiUdt1RFs) |
+| Pendente Industrial Trio | [Natalia Y. / Unsplash](https://unsplash.com/photos/R-qWnGTaAyU) |
+| Lâmpada Filamento Vintage | [Unsplash](https://unsplash.com/photos/incandescent-bulb-on-black-surface-fmTde1Fe23A) |
+| Lâmpada LED Inteligente Wi-Fi | [Unsplash](https://unsplash.com/photos/white-bulb-TuAtSs8peoM) |
+| Kit 6 Lâmpadas Bulbo LED 9W | [Unsplash](https://unsplash.com/photos/gray-incandescent-lamp-photography-d9yOg5zP-oQ) |
+| Fita de LED RGB 5m | [Zishan khan / Unsplash](https://unsplash.com/photos/assorted-colored-led-lights-NHnW3cmrCeo) |
+| Barra de LED para Armário | [superlightingled / Unsplash](https://unsplash.com/photos/a-large-group-of-lights-IGPhiyH9t-A) |
+| Luz Neon Flex 2m | [Dejan Nasteski / Unsplash](https://unsplash.com/photos/blue-and-white-light-fixture-I3rvOvxvybE) |
 
 ## Melhorias futuras
 

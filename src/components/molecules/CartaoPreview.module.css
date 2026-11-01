@@ -1,0 +1,184 @@
+/* Cartao realista: proporcao de cartao de credito (85,6 x 54 mm), frente e
+   verso montados um sobre o outro e girados em 3D quando o CVV e focado. */
+.cena {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  perspective: 1400px;
+}
+
+.cartao {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.586;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+.virado {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  color: #f5efe6;
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(232, 176, 75, 0.28) 0%, rgba(232, 176, 75, 0) 55%),
+    linear-gradient(135deg, #3b342e 0%, #26211d 48%, #15120f 100%);
+  box-shadow:
+    0 22px 40px rgba(28, 25, 23, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Textura escovada sutil, como um cartao de metal. */
+.face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.025) 0 2px,
+    rgba(255, 255, 255, 0) 2px 6px
+  );
+  pointer-events: none;
+}
+
+.frente {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 7% 7.5%;
+}
+
+.verso {
+  transform: rotateY(180deg);
+  padding: 9% 0;
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1rem, 4.4vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tipo {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e8c98f;
+}
+
+.meio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chip {
+  width: 15%;
+  min-width: 42px;
+  height: auto;
+}
+
+.aproximacao {
+  width: 7%;
+  min-width: 20px;
+  opacity: 0.85;
+}
+
+.numero {
+  margin: 0;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: clamp(1rem, 4.8vw, 1.4rem);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.campo {
+  min-width: 0;
+}
+
+.campoDireita {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.rotulo {
+  display: block;
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #cfc3b1;
+}
+
+.valor {
+  margin: 0.125rem 0 0;
+  font-size: clamp(0.8rem, 3.4vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.tarja {
+  height: 20%;
+  background: #0b0a09;
+}
+
+.assinatura {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 7% 7.5% 0;
+  height: 16%;
+  padding: 0 4%;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #f3ece1 0 6px,
+    #e7dccb 6px 12px
+  );
+}
+
+.cvv {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #1c1917;
+}
+
+.aviso {
+  margin: 5% 7.5% 0;
+  font-size: 0.625rem;
+  line-height: 1.4;
+  color: #cfc3b1;
+}

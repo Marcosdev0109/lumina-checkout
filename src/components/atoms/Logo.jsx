@@ -1,17 +1,33 @@
+import { useId } from 'react'
 import PropTypes from 'prop-types'
 
-/** Marca da loja desenhada em SVG inline, sem dependencia de arquivo externo. */
-function Logo({ tamanho = 28 }) {
+/**
+ * Marca da Lumina: um pendente minimalista com um feixe de luz quente.
+ * Desenhada em SVG inline, sem depender de arquivo externo.
+ */
+function Logo({ tamanho = 34 }) {
+  // Ids unicos para os degrades: o logo aparece mais de uma vez na mesma pagina.
+  const id = useId().replace(/:/g, '')
+  const idFeixe = `feixe-${id}`
+  const idBrilho = `brilho-${id}`
+
   return (
-    <svg viewBox="0 0 32 32" width={tamanho} height={tamanho} aria-hidden="true" focusable="false">
-      <circle cx="16" cy="13" r="8" fill="#f5c344" />
-      <path d="M11 22h10v3a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2v-3z" fill="#3c3a52" />
-      <path
-        d="M16 2v2M26 13h2M4 13h2M23.8 5.2l1.4-1.4M6.8 3.8l1.4 1.4"
-        stroke="#f5c344"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+    <svg viewBox="0 0 40 40" width={tamanho} height={tamanho} aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id={idFeixe} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#e8b04b" stopOpacity="0.75" />
+          <stop offset="1" stopColor="#e8b04b" stopOpacity="0" />
+        </linearGradient>
+        <radialGradient id={idBrilho} cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stopColor="#fff4d6" />
+          <stop offset="0.6" stopColor="#f2c063" />
+          <stop offset="1" stopColor="#d6a04a" />
+        </radialGradient>
+      </defs>
+      <path d="M11 24h18l8 16H3z" fill={`url(#${idFeixe})`} />
+      <path d="M20 1v9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M9.5 22.5C9.5 15.6 14.2 10 20 10s10.5 5.6 10.5 12.5z" fill="currentColor" />
+      <circle cx="20" cy="23.6" r="3.4" fill={`url(#${idBrilho})`} />
     </svg>
   )
 }

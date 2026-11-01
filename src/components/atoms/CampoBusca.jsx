@@ -19,6 +19,7 @@ const CampoBusca = forwardRef(function CampoBusca({ valor, onChange, rotulo = 'B
         autoComplete="off"
         fullWidth
         inputRef={ref}
+        slotProps={{ inputLabel: { shrink: true } }}
         value={valor}
         onChange={(evento) => onChange(evento.target.value)}
         sx={{ backgroundColor: 'var(--cor-superficie)' }}

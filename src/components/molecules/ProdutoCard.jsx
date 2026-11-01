@@ -26,16 +26,23 @@ function ProdutoCard({ produto, onAdicionar, podeAdicionar = true }) {
         <Preco className={estilos.preco} valor={produto.preco} />
 
         <div className={estilos.acoes}>
+          {/* Grafite quente em vez do primario quase preto: o botao continua
+              sendo a acao principal, mas sem pesar mais que a foto. */}
           <Button
             variant="contained"
             fullWidth
+            sx={{
+              minHeight: 44,
+              bgcolor: '#44403c',
+              '&:hover': { bgcolor: '#292524' }
+            }}
             onClick={() => onAdicionar?.(produto)}
             disabled={!podeAdicionar}
           >
             {podeAdicionar ? 'Adicionar ao carrinho' : 'Limite de estoque atingido'}
           </Button>
 
-          <Link className="botao botao--secundario" to={linkDetalhe}>
+          <Link className={`botao botao--secundario ${estilos.verDetalhes}`} to={linkDetalhe}>
             Ver detalhes
           </Link>
         </div>

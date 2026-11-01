@@ -4,20 +4,27 @@
    CSS Modules (arquivos .module.css ao lado de cada componente). */
 
 :root {
-  --cor-fundo: #f6f5fb;
+  /* Paleta "luz quente": grafite, off-white e latao, combinando com as fotos. */
+  --cor-fundo: #faf7f2;
   --cor-superficie: #ffffff;
-  --cor-texto: #191826;
-  --cor-texto-suave: #63607a;
-  --cor-borda: #e6e3f0;
-  --cor-primaria: #5b3df5;
-  --cor-primaria-escura: #4227d6;
-  --cor-erro: #c02717;
-  --cor-sucesso: #128054;
-  --cor-destaque: #f5c344;
+  --cor-texto: #1c1917;
+  --cor-texto-suave: #6b6359;
+  --cor-borda: #ebe4d9;
+  --cor-primaria: #1c1917;
+  --cor-primaria-escura: #3a332d;
+  --cor-acento: #d6a04a;
+  --cor-acento-texto: #8a5a12;
+  --cor-acento-suave: #f6ead4;
+  --cor-foco: #b7791f;
+  --cor-erro: #b42318;
+  --cor-sucesso: #127a4f;
+  --cor-destaque: #e8b04b;
+  --fonte-texto: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --fonte-titulo: 'Fraunces', Georgia, 'Times New Roman', serif;
   --raio: 16px;
   --raio-pequeno: 10px;
-  --sombra: 0 1px 2px rgba(25, 24, 38, 0.04), 0 8px 24px rgba(25, 24, 38, 0.06);
-  --sombra-forte: 0 12px 32px rgba(45, 28, 138, 0.28);
+  --sombra: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.06);
+  --sombra-forte: 0 18px 40px rgba(28, 25, 23, 0.22);
 }
 
 * {
@@ -28,14 +35,14 @@ body {
   margin: 0;
   background-color: var(--cor-fundo);
   color: var(--cor-texto);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-family: var(--fonte-texto);
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
 :focus-visible {
-  outline: 3px solid var(--cor-primaria);
+  outline: 3px solid var(--cor-foco);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -72,9 +79,6 @@ body {
   flex-direction: column;
 }
 
-
-
-
 /* ---------- Estrutura das paginas ---------- */
 
 .pagina {
@@ -85,7 +89,9 @@ body {
 }
 
 .pagina__cabecalho h1 {
-  font-size: 1.625rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.75rem;
   letter-spacing: -0.02em;
   margin: 0 0 0.25rem;
 }
@@ -102,26 +108,12 @@ body {
 .barra-filtros {
   display: grid;
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 600px) {
   .barra-filtros {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .barra-filtros > [role='search'] {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (min-width: 1024px) {
-  .barra-filtros {
-    grid-template-columns: 2fr 1fr 1fr;
-  }
-
-  .barra-filtros > [role='search'] {
-    grid-column: auto;
+    grid-template-columns: 2fr 1fr;
   }
 }
 
@@ -132,14 +124,19 @@ body {
 }
 
 .trilha a {
-  color: var(--cor-primaria);
+  color: var(--cor-acento-texto);
   font-weight: 600;
 }
 
 .pagina--resultado {
   max-width: 520px;
   text-align: center;
-  padding-top: 3.5rem;
+  padding-top: 2rem;
+}
+
+.pagina--resultado [aria-label='Etapas da compra'] {
+  justify-content: center;
+  margin-bottom: 2.5rem;
 }
 
 /* Grade do checkout: uma coluna no celular, duas no desktop.
@@ -173,12 +170,6 @@ body {
   flex-direction: column;
   gap: 0.75rem;
 }
-
-
-
-
-
-
 
 /* ---------- Resumo ---------- */
 
@@ -223,82 +214,6 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Previa do cartao ---------- */
-
-.cartao {
-  background: linear-gradient(135deg, #3a2a8c 0%, #4f33e0 55%, #5b3df5 100%);
-  color: #fff;
-  border-radius: var(--raio);
-  box-shadow: var(--sombra-forte);
-  padding: 1rem;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-}
-
-.cartao__topo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.cartao__chip {
-  width: 42px;
-  height: 30px;
-  border-radius: 6px;
-  background: linear-gradient(140deg, var(--cor-destaque), #d9a01f);
-}
-
-.cartao__marca {
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  opacity: 1;
-}
-
-.cartao__numero {
-  margin: 0;
-  font-size: clamp(0.95rem, 4.4vw, 1.1875rem);
-  letter-spacing: 0.04em;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.cartao__rodape {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.cartao__campo {
-  min-width: 0;
-}
-
-.cartao__campo--validade {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.cartao__rotulo {
-  display: block;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 1;
-}
-
-.cartao__valor {
-  margin: 0.125rem 0 0;
-  font-size: clamp(0.8125rem, 3.4vw, 0.9375rem);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 /* ---------- Formulario ---------- */
 
 .formulario > * {
@@ -334,7 +249,7 @@ body {
   padding: 0.75rem;
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-pequeno);
-  background: #fbfaff;
+  background: #fffdf9;
   color: inherit;
   min-height: 46px;
   min-width: 0;
@@ -343,17 +258,17 @@ body {
 }
 
 .campo input:hover {
-  border-color: #cfc9e6;
+  border-color: #d9cfbf;
 }
 
 .campo input:focus {
   background: #fff;
-  border-color: var(--cor-primaria);
+  border-color: var(--cor-foco);
 }
 
 .campo input[aria-invalid='true'] {
   border-color: var(--cor-erro);
-  background: #fff7f6;
+  background: #fff6f5;
 }
 
 .campo__erro {
@@ -421,11 +336,11 @@ body {
 }
 
 .botao--secundario:hover {
-  background: #ece8ff;
+  background: var(--cor-acento-suave);
 }
 
 .botao:disabled {
-  background: #a49ada;
+  background: #b8afa4;
   cursor: not-allowed;
 }
 
@@ -435,7 +350,7 @@ body {
 
 .link-voltar {
   align-self: center;
-  color: var(--cor-primaria);
+  color: var(--cor-acento-texto);
   font-weight: 600;
 }
 
@@ -477,16 +392,6 @@ body {
 
   .pagina__cabecalho h1 {
     font-size: 2rem;
-  }
-
-
-  .cartao {
-    padding: 1.5rem;
-    min-height: 210px;
-  }
-
-  .cartao__numero {
-    font-size: 1.375rem;
   }
 
   .formulario,

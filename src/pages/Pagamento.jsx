@@ -1,5 +1,6 @@
 import FormularioPagamento from '../components/organisms/FormularioPagamento'
 import ResumoCompra from '../components/organisms/ResumoCompra'
+import EtapasCompra from '../components/molecules/EtapasCompra'
 import { usePagamento } from '../hooks/usePagamento'
 import { useCarrinho } from '../hooks/useCarrinho'
 
@@ -13,6 +14,7 @@ function Pagamento() {
 
   return (
     <main className="pagina" id="conteudo">
+      <EtapasCompra etapaAtual={2} />
       <header className="pagina__cabecalho">
         <h1>Pagamento</h1>
         <p className="pagina__apoio">

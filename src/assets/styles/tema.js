@@ -6,15 +6,15 @@ import { createTheme } from '@mui/material/styles'
  */
 export const tema = createTheme({
   palette: {
-    primary: { main: '#5b3df5', dark: '#4227d6', contrastText: '#ffffff' },
-    secondary: { main: '#f5c344', contrastText: '#191826' },
-    error: { main: '#c02717' },
-    success: { main: '#128054' },
-    text: { primary: '#191826', secondary: '#63607a' }
+    primary: { main: '#1c1917', dark: '#000000', light: '#3a332d', contrastText: '#ffffff' },
+    secondary: { main: '#d6a04a', contrastText: '#1c1917' },
+    error: { main: '#b42318' },
+    success: { main: '#127a4f' },
+    text: { primary: '#1c1917', secondary: '#6b6359' }
   },
   shape: { borderRadius: 10 },
   typography: {
-    fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
+    fontFamily: "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
     button: { textTransform: 'none', fontWeight: 700, fontSize: '1rem' }
   },
   components: {

@@ -43,10 +43,18 @@
   color: var(--cor-texto-suave);
 }
 
+/* O nome ocupa sempre duas linhas (cortando com reticencias se passar),
+   para preco e botoes ficarem na mesma altura em todos os cards. */
 .nome {
   margin: 0;
   font-size: 1.05rem;
   line-height: 1.3;
+  min-height: 2.6em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 .nome a {
@@ -76,6 +84,20 @@
   margin-top: auto;
   display: grid;
   gap: 0.5rem;
+}
+
+/* "Ver detalhes" e a acao secundaria do card: borda fina e clara
+   para nao competir com o botao de adicionar nem com a foto. */
+.acoes .verDetalhes {
+  min-height: 44px;
+  border: 1px solid #d6d3d1;
+  color: #44403c;
+  font-weight: 600;
+}
+
+.acoes .verDetalhes:hover {
+  border-color: #a8a29e;
+  background: var(--cor-fundo);
 }
 
 /* Destaque ao passar o mouse, so em dispositivos com mouse.

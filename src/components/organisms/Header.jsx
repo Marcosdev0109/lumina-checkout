@@ -9,6 +9,11 @@ function classeDoLink({ isActive }) {
   return isActive ? `${estilos.link} ${estilos.ativo}` : estilos.link
 }
 
+/** Classe do botao do carrinho, em formato de pilula. */
+function classeDoCarrinho({ isActive }) {
+  return isActive ? `${estilos.carrinho} ${estilos.carrinhoAtivo}` : estilos.carrinho
+}
+
 /** Icone de sacola desenhado em SVG. */
 function IconeCarrinho() {
   return (
@@ -32,9 +37,11 @@ function Header() {
   return (
     <header className={estilos.header}>
       <div className={estilos.conteudo}>
-        <Link className={estilos.marca} to="/produtos">
+        <Link className={estilos.marca} to="/produtos" aria-label="Lumina Store, ir para produtos">
           <Logo />
-          <span>Lumina Store</span>
+          <span className={estilos.nomeMarca} aria-hidden="true">
+            lumina<span className={estilos.sufixoMarca}>store</span>
+          </span>
         </Link>
 
         <nav className={estilos.navegacao} aria-label="Principal">
@@ -45,7 +52,7 @@ function Header() {
               </NavLink>
             </li>
             <li>
-              <NavLink className={classeDoLink} to="/carrinho" aria-label={rotuloCarrinho}>
+              <NavLink className={classeDoCarrinho} to="/carrinho" aria-label={rotuloCarrinho}>
                 {/* Badge do Material UI com a quantidade total de itens (RF09). */}
                 <Badge
                   badgeContent={quantidadeTotal}
@@ -55,7 +62,8 @@ function Header() {
                     '& .MuiBadge-badge': {
                       backgroundColor: 'var(--cor-destaque)',
                       color: 'var(--cor-texto)',
-                      fontWeight: 700
+                      fontWeight: 700,
+                      border: '2px solid var(--cor-superficie)'
                     }
                   }}
                 >

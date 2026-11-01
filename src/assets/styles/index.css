@@ -131,7 +131,12 @@ body {
 .pagina--resultado {
   max-width: 520px;
   text-align: center;
-  padding-top: 3.5rem;
+  padding-top: 2rem;
+}
+
+.pagina--resultado [aria-label='Etapas da compra'] {
+  justify-content: center;
+  margin-bottom: 2.5rem;
 }
 
 /* Grade do checkout: uma coluna no celular, duas no desktop.

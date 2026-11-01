@@ -1,13 +1,21 @@
 .footer {
   margin-top: auto;
-  border-top: 1px solid var(--cor-borda);
-  background: var(--cor-superficie);
-  color: var(--cor-texto-suave);
+  background: var(--cor-primaria);
+  color: #d9d2c7;
   font-size: 0.875rem;
   text-align: center;
-  padding: 1.25rem 1rem;
+  padding: 1.75rem 1rem;
 }
 
 .footer p {
   margin: 0;
+}
+
+.marca {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-family: var(--fonte-titulo);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
 }

@@ -4,6 +4,7 @@ import ListaProdutos from '../components/organisms/ListaProdutos'
 import Mensagem from '../components/atoms/Mensagem'
 import CampoBusca from '../components/atoms/CampoBusca'
 import FiltrosProdutos from '../components/molecules/FiltrosProdutos'
+import DestaqueCatalogo from '../components/organisms/DestaqueCatalogo'
 import { useProdutos } from '../hooks/useProdutos'
 import { useCarrinho } from '../hooks/useCarrinho'
 import { filtrarPorCategoria, filtrarProdutos, listarCategorias, ordenarPorPreco } from '../utils/busca'
@@ -98,10 +99,7 @@ function Produtos() {
 
   return (
     <main className="pagina pagina--larga" id="conteudo">
-      <header className="pagina__cabecalho">
-        <h1>Produtos</h1>
-        <p className="pagina__apoio">Iluminação para todos os ambientes da sua casa.</p>
-      </header>
+      <DestaqueCatalogo />
 
       <div className="barra-filtros">
         <CampoBusca ref={campoBuscaRef} valor={termo} onChange={setTermo} />

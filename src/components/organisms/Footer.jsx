@@ -6,6 +6,7 @@ function Footer() {
 
   return (
     <footer className={estilos.footer}>
+      <span className={estilos.marca}>lumina</span>
       <p>
         Lumina Store {anoAtual} - projeto acadêmico SC Tech. Pagamento simulado no navegador.
       </p>

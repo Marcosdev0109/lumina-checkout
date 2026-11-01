@@ -90,6 +90,7 @@
    para nao competir com o botao de adicionar nem com a foto. */
 .acoes .verDetalhes {
   min-height: 44px;
+  padding-block: 0.5rem;
   border: 1px solid #d6d3d1;
   color: #44403c;
   font-weight: 600;

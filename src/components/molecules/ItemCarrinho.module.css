@@ -75,7 +75,7 @@
 
 @media (min-width: 600px) {
   .item {
-    grid-template-columns: 88px 1fr auto;
+    grid-template-columns: 88px 1fr;
   }
 
   .imagem {
@@ -84,7 +84,7 @@
   }
 
   .controles {
-    grid-column: auto;
-    justify-content: flex-end;
+    grid-column: 2;
+    justify-content: space-between;
   }
 }

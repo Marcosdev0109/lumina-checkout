@@ -7,6 +7,7 @@ import Pagamento from './pages/Pagamento'
 import Sucesso from './pages/Sucesso'
 import Falha from './pages/Falha'
 import NaoEncontrada from './pages/NaoEncontrada'
+import Assistente from './pages/Assistente'
 import RotaPrivada from './routes/RotaPrivada'
 
 /**
@@ -20,6 +21,7 @@ function App() {
         <Route index element={<Navigate to="/produtos" replace />} />
         <Route path="produtos" element={<Produtos />} />
         <Route path="produtos/:id" element={<DetalheProduto />} />
+        <Route path="assistente" element={<Assistente />} />
         <Route path="carrinho" element={<Carrinho />} />
         <Route
           path="pagamento"

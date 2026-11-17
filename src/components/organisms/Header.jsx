@@ -52,6 +52,11 @@ function Header() {
               </NavLink>
             </li>
             <li>
+              <NavLink className={classeDoLink} to="/assistente">
+                Assistente
+              </NavLink>
+            </li>
+            <li>
               <NavLink className={classeDoCarrinho} to="/carrinho" aria-label={rotuloCarrinho}>
                 {/* Badge do Material UI com a quantidade total de itens (RF09). */}
                 <Badge

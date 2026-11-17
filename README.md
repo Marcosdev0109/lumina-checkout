@@ -14,6 +14,7 @@ Loja virtual de iluminação desenvolvida em **React + Vite** como **Projeto Ava
 - [Links do projeto](#links-do-projeto)
 - [O problema que o sistema resolve](#o-problema-que-o-sistema-resolve)
 - [Funcionalidades](#funcionalidades)
+- [Assistente de iluminação](#assistente-de-iluminação-novo)
 - [Identidade visual](#identidade-visual)
 - [Fluxo do usuário e rotas](#fluxo-do-usuário-e-rotas)
 - [Tecnologias e técnicas](#tecnologias-e-técnicas)
@@ -75,6 +76,17 @@ A **Lumina Store** fecha esse ciclo de e-commerce: vitrine → busca → detalhe
 - ⭐ Busca sincronizada com a URL (`/produtos?busca=lampada`) com `useSearchParams`.
 - ⭐ Filtro por categoria e ordenação por preço.
 - ⭐ Teste de componente com React Testing Library e relatório de cobertura.
+
+## Assistente de iluminação (novo)
+
+Rota `/assistente`, no menu do topo. O cliente responde quatro perguntas (cômodo, tamanho em m², o que quer fazer com a luz e estilo) e um orçamento opcional. O assistente:
+
+- calcula os **lúmens recomendados** para o cômodo: lux de referência × área (por exemplo, escritório com 500 lux, como na NBR ISO/CIE 8995-1);
+- pontua cada produto do catálogo pelos critérios atendidos e mostra **até 3 recomendações**, com o motivo de cada uma e a compatibilidade em %;
+- ignora produtos sem estoque ou acima do orçamento e desempata pelo menor preço;
+- traz uma **tabela para comparar** as opções e o botão para adicionar ao carrinho.
+
+As regras ficam em `src/utils/recomendacao.js` (funções puras) e têm testes em `recomendacao.test.js` e `Assistente.test.jsx`. Cada produto do `db.json` ganhou os campos `ambientes`, `estilos` e `usos`.
 
 ## Identidade visual
 

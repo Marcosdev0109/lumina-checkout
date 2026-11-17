@@ -7,7 +7,18 @@
       "preco": 189.9,
       "categoria": "Luminárias de Mesa",
       "imagem": "https://images.unsplash.com/photo-1542728928-1413d1894ed1?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 5
+      "estoque": 5,
+      "ambientes": [
+        "escritorio",
+        "quarto"
+      ],
+      "estilos": [
+        "moderno",
+        "minimalista"
+      ],
+      "usos": [
+        "leitura"
+      ]
     },
     {
       "id": "2",
@@ -16,7 +27,17 @@
       "preco": 229.9,
       "categoria": "Luminárias de Mesa",
       "imagem": "https://images.unsplash.com/photo-1582356630861-61bb9b41f541?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 3
+      "estoque": 3,
+      "ambientes": [
+        "escritorio"
+      ],
+      "estilos": [
+        "industrial",
+        "moderno"
+      ],
+      "usos": [
+        "leitura"
+      ]
     },
     {
       "id": "3",
@@ -25,7 +46,18 @@
       "preco": 99.9,
       "categoria": "Luminárias de Mesa",
       "imagem": "https://images.unsplash.com/photo-1570974802254-4b0ad1a755f5?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 8
+      "estoque": 8,
+      "ambientes": [
+        "infantil",
+        "quarto"
+      ],
+      "estilos": [
+        "moderno"
+      ],
+      "usos": [
+        "leitura",
+        "ambiente"
+      ]
     },
     {
       "id": "4",
@@ -34,7 +66,19 @@
       "preco": 349.9,
       "categoria": "Pendentes",
       "imagem": "https://images.unsplash.com/photo-1559924508-1461423083c5?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 4
+      "estoque": 4,
+      "ambientes": [
+        "sala",
+        "cozinha"
+      ],
+      "estilos": [
+        "nordico",
+        "minimalista"
+      ],
+      "usos": [
+        "geral",
+        "ambiente"
+      ]
     },
     {
       "id": "5",
@@ -43,7 +87,18 @@
       "preco": 279.0,
       "categoria": "Pendentes",
       "imagem": "https://images.unsplash.com/photo-1630806293051-7b66c27ec042?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 2
+      "estoque": 2,
+      "ambientes": [
+        "sala",
+        "quarto"
+      ],
+      "estilos": [
+        "retro"
+      ],
+      "usos": [
+        "ambiente",
+        "decorativo"
+      ]
     },
     {
       "id": "6",
@@ -52,7 +107,17 @@
       "preco": 459.0,
       "categoria": "Pendentes",
       "imagem": "https://images.unsplash.com/photo-1512418408532-5445158b1445?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 3
+      "estoque": 3,
+      "ambientes": [
+        "cozinha",
+        "sala"
+      ],
+      "estilos": [
+        "industrial"
+      ],
+      "usos": [
+        "geral"
+      ]
     },
     {
       "id": "7",
@@ -61,7 +126,19 @@
       "preco": 39.9,
       "categoria": "Lâmpadas",
       "imagem": "https://images.unsplash.com/photo-1495291916458-c12f594151e7?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 20
+      "estoque": 20,
+      "ambientes": [
+        "sala",
+        "quarto"
+      ],
+      "estilos": [
+        "retro",
+        "industrial"
+      ],
+      "usos": [
+        "decorativo",
+        "ambiente"
+      ]
     },
     {
       "id": "8",
@@ -70,7 +147,21 @@
       "preco": 79.9,
       "categoria": "Lâmpadas",
       "imagem": "https://images.unsplash.com/photo-1532007271951-c487760934ae?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 10
+      "estoque": 10,
+      "ambientes": [
+        "sala",
+        "quarto",
+        "infantil",
+        "escritorio"
+      ],
+      "estilos": [
+        "moderno",
+        "minimalista"
+      ],
+      "usos": [
+        "ambiente",
+        "geral"
+      ]
     },
     {
       "id": "9",
@@ -79,7 +170,22 @@
       "preco": 59.9,
       "categoria": "Lâmpadas",
       "imagem": "https://images.unsplash.com/photo-1485119502162-016e4409beab?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 15
+      "estoque": 15,
+      "ambientes": [
+        "cozinha",
+        "sala",
+        "quarto",
+        "escritorio",
+        "infantil"
+      ],
+      "estilos": [
+        "minimalista",
+        "moderno",
+        "nordico"
+      ],
+      "usos": [
+        "geral"
+      ]
     },
     {
       "id": "10",
@@ -88,7 +194,19 @@
       "preco": 129.5,
       "categoria": "Fitas e Barras de LED",
       "imagem": "https://images.unsplash.com/photo-1572249930263-64fc5bbdb14b?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 6
+      "estoque": 6,
+      "ambientes": [
+        "sala",
+        "quarto",
+        "infantil"
+      ],
+      "estilos": [
+        "moderno"
+      ],
+      "usos": [
+        "decorativo",
+        "ambiente"
+      ]
     },
     {
       "id": "11",
@@ -97,7 +215,18 @@
       "preco": 89.9,
       "categoria": "Fitas e Barras de LED",
       "imagem": "https://images.unsplash.com/photo-1659066019874-7a15628cea60?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 7
+      "estoque": 7,
+      "ambientes": [
+        "quarto",
+        "cozinha"
+      ],
+      "estilos": [
+        "minimalista",
+        "moderno"
+      ],
+      "usos": [
+        "geral"
+      ]
     },
     {
       "id": "12",
@@ -106,7 +235,18 @@
       "preco": 149.9,
       "categoria": "Fitas e Barras de LED",
       "imagem": "https://images.unsplash.com/photo-1618403323851-ac3d38029495?w=600&h=600&fit=crop&q=70&auto=format",
-      "estoque": 1
+      "estoque": 1,
+      "ambientes": [
+        "sala",
+        "quarto"
+      ],
+      "estilos": [
+        "moderno",
+        "retro"
+      ],
+      "usos": [
+        "decorativo"
+      ]
     }
   ]
 }
